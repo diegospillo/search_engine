@@ -3,11 +3,13 @@ const connection = require('./connection');
 function Get(req, res) {
   const pool = connection();
 
-  pool.query("CREATE TABLE Studenti (id VARCHAR(100) PRIMARY KEY, Nome VARCHAR(20) NOT NULL, Cognome VARCHAR(20) NOT NULL, Email VARCHAR(50) NOT NULL, id_Classe INTEGER NOT NULL)", (err, result) => {
+  pool.query("SELECT * FROM Studenti;", (err, result) => {
     if (err) {
       console.error(err);
     } else {
-      res.send("Tabella creata con successo!");
+      console.log("Dati letti con successo!");
+      //console.log(result.rows);
+      res.send(result.rows);
     }
   });
 }
