@@ -1,5 +1,17 @@
 const connection = require("../connectionDB");
 
+function Create(req, res) {
+    const pool = connection();
+  
+    pool.query("CREATE TABLE Pizze (id SERIAL PRIMARY KEY, Nome VARCHAR(20) NOT NULL, prezzo INTEGER NOT NULL)", (err, result) => {
+        if (err) {
+          console.error(err);
+        } else {
+          res.send("Tabella creata con successo!");
+        }
+      });
+  }
+
 function Get(req, res) {
   const pool = connection();
 
@@ -42,6 +54,7 @@ function Drop(req, res) {
 }
 
 module.exports = {
+  create: Create,
   get: Get,
   insert: Insert,
   drop: Drop

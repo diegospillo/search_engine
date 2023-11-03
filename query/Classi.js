@@ -1,4 +1,4 @@
-const connection = require('./connection');
+const connection = require("../connectionDB");
 
 function Get(req, res) {
   const pool = connection();
@@ -12,6 +12,21 @@ function Get(req, res) {
       res.send(result.rows);
     }
   });
+}
+
+function Insert(req, res) {
+  const pool = connection();
+
+  pool.query(
+    "INSERT INTO Classi (anno, sezione) VALUES ('1', 'A'), ('1', 'B'), ('1', 'C'), ('2', 'A'), ('2', 'B'), ('2', 'C'), ('3', 'A'), ('3', 'B'), ('3', 'C'), ('3', 'DE'),('4', 'A'), ('4', 'B'), ('4', 'C'), ('4', 'DE'), ('5', 'A'), ('5', 'B'), ('5', 'C'), ('5', 'DE');",
+    (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log("Dati inseriti con successo!");
+      }
+    }
+  );
 }
 
 function Drop(req, res) {
@@ -28,5 +43,6 @@ function Drop(req, res) {
 
 module.exports = {
   get: Get,
+  insert: Insert,
   drop: Drop
 };
