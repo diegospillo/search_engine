@@ -30,12 +30,12 @@ function Insert(req, res) {
   const pool = connection();
 
   pool.query(
-    "INSERT INTO Studenti (Nome, prezzo) VALUES ('Margherita', 1), ('Boscaiola', 1.5);",
+    "INSERT INTO Pizze (Nome, prezzo) VALUES ('Margherita', 1), ('Boscaiola', 1.5);",
     (err, result) => {
       if (err) {
         console.error(err);
       } else {
-        res.end("Dati inseriti con successo!");
+        res.send("Dati inseriti con successo!");
       }
     }
   );
