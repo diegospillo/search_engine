@@ -3,7 +3,8 @@ const cors = require('cors');
 
 const Classi = require('./query/Classi');
 const Studenti = require('./query/Studenti');
-const Pizze = require('./query/Pizze')
+const Pizze = require('./query/Pizze');
+const Ordini = require('./query/Ordini');
 
 const app = express();
 
@@ -183,5 +184,9 @@ app.get("/drop_Studenti", (req,res)=>Studenti.drop(req,res))
 app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))
 app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))
 app.get("/alter_Pizze", (req,res)=>Pizze.alter(req,res))
+
+app.get("/get_Ordini", (req,res)=>Ordini.get(req,res))
+app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))
+app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
 
 app.listen(5000, () => {console.log("Server start on port 5000")})
