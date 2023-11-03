@@ -25,5 +25,6 @@ function Insert(req, res) {
   }
 
 module.exports = {
-  create: Get
+  create: Get,
+  insert: Insert
 };

@@ -174,5 +174,6 @@ app.get("/get_Classi", (req,res)=>Classi.get(req,res))
 app.get("/drop_Classi", (req,res)=>Classi.drop(req,res))
 
 app.get("/get_Studenti", (req,res)=>Studenti.get(req,res))
+app.get("/insert_Studenti", (req,res)=>Studenti.insert(req,res))
 
 app.listen(5000, () => {console.log("Server start on port 5000")})
