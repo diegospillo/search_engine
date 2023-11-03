@@ -17,10 +17,19 @@ const pool = new Pool({
   }
 });
 */
-pool.query("INSERT INTO Classi (anno, sezione) VALUES ('1', 'A'), ('1', 'B'), ('1', 'C'), ('2', 'A'), ('2', 'B'), ('2', 'C'), ('3', 'A'), ('3', 'B'), ('3', 'C'), ('3', 'DE'),('4', 'A'), ('4', 'B'), ('4', 'C'), ('4', 'DE'), ('5', 'A'), ('5', 'B'), ('5', 'C'), ('5', 'DE');", (err, result) => {
+/*pool.query("INSERT INTO Classi (anno, sezione) VALUES ('1', 'A'), ('1', 'B'), ('1', 'C'), ('2', 'A'), ('2', 'B'), ('2', 'C'), ('3', 'A'), ('3', 'B'), ('3', 'C'), ('3', 'DE'),('4', 'A'), ('4', 'B'), ('4', 'C'), ('4', 'DE'), ('5', 'A'), ('5', 'B'), ('5', 'C'), ('5', 'DE');", (err, result) => {
   if (err) {
     console.error(err);
   } else {
     console.log("Dati inseriti con successo!");
+  }
+});*/
+
+pool.query("SELECT * FROM Classi;", (err, result) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log("Dati letti con successo!");
+    console.log(result.rows);
   }
 });
