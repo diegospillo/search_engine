@@ -70,6 +70,7 @@ function Drop(req, res) {
 
 module.exports = {
   create: Create,
+  alter: Alter,
   get: Get,
   insert: Insert,
   drop: Drop
