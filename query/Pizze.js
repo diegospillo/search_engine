@@ -35,7 +35,7 @@ function Insert(req, res) {
       if (err) {
         console.error(err);
       } else {
-        console.log("Dati inseriti con successo!");
+        res.end("Dati inseriti con successo!");
       }
     }
   );
