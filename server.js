@@ -180,7 +180,7 @@ app.get("/get_Studenti", (req,res)=>Studenti.get(req,res))
 app.get("/insert_Studenti", (req,res)=>Studenti.insert(req,res))
 app.get("/drop_Studenti", (req,res)=>Studenti.drop(req,res))
 
-app.get("/create_Pizze", (req,res)=>Pizze.create(req,res))
+app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))
 app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))
 app.get("/alter_Pizze", (req,res)=>Pizze.alter(req,res))
 
