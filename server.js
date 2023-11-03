@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors');
+const get_Classi = require('./query/get_classi');
 
 const app = express();
 
@@ -165,5 +166,9 @@ app.get("/elimina_ordine", (req,res) => {
    console.log(req.query);
    res.redirect(`http://localhost:5173/ordine?id=${id}&stato=true`)
 })
+
+////////////////////////////////////////////////// QUERY DI CREAZIONE
+
+app.get("/get_Classi", (req,res)=>get_Classi(req,res))
 
 app.listen(5000, () => {console.log("Server start on port 5000")})

@@ -25,7 +25,7 @@ const pool = new Pool({
   }
 });*/
 
-pool.query("SELECT * FROM Classi;", (err, result) => {
+/*pool.query("SELECT * FROM Classi;", (err, result) => {
   if (err) {
     console.error(err);
   } else {
@@ -33,3 +33,4 @@ pool.query("SELECT * FROM Classi;", (err, result) => {
     console.log(result.rows);
   }
 });
+*/
