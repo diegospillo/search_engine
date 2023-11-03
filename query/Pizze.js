@@ -15,7 +15,7 @@ function Create(req, res) {
 function Get(req, res) {
   const pool = connection();
 
-  pool.query("SELECT * FROM Studenti;", (err, result) => {
+  pool.query("SELECT * FROM Pizze;", (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -30,12 +30,27 @@ function Insert(req, res) {
   const pool = connection();
 
   pool.query(
-    "INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ('116506312363245768991', 'Diego', 'Albani', 'albani.diego@midossi.it', 16);",
+    "INSERT INTO Studenti (Nome, prezzo) VALUES ('Margherita', 1), ('Boscaiola', 1.5);",
     (err, result) => {
       if (err) {
         console.error(err);
       } else {
         console.log("Dati inseriti con successo!");
+      }
+    }
+  );
+}
+
+function Alter(req, res){
+    const pool = connection();
+
+  pool.query(
+    "ALTER TABLE Pizze ALTER COLUMN prezzo TYPE numeric;",
+    (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log("Dati cambiati con successo!");
       }
     }
   );
