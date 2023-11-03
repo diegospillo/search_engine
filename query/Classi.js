@@ -17,7 +17,7 @@ function Get(req, res) {
 function Drop(req, res) {
   const pool = connection();
 
-  pool.query("DELETE FROM Classi WHERE id > 36;", (err, result) => {
+  pool.query("DELETE FROM Classi WHERE id > 18;", (err, result) => {
     if (err) {
       console.error(err);
     } else {
