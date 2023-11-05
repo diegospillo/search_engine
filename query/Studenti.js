@@ -55,7 +55,7 @@ function Drop(req, res) {
 
 async function Exist(pool,id){
   async function isIdPresent(id) {
-    const results = await pool.query(`SELECT 1 FROM studenti WHERE id = ${id}`);
+    const results = await pool.query(`SELECT 1 FROM studenti WHERE id = '${id}'`);
     console.log(results);
     return false;
   }
