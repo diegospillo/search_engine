@@ -3,7 +3,7 @@ const connection = require("../connectionDB");
 function Create(req, res){
   const pool = connection();
 
-  pool.query("CREATE TABLE Studenti (id VARCHAR(100) PRIMARY KEY, nome VARCHAR(20) NOT NULL, cognome VARCHAR(20) NOT NULL, email VARCHAR(20) NOT NULL, id_classe integer NOT NULL)", (err, result) => {
+  pool.query("CREATE TABLE Studenti (id VARCHAR(100) PRIMARY KEY, nome VARCHAR(20) NOT NULL, cognome VARCHAR(20) NOT NULL, email VARCHAR(50) NOT NULL, id_classe integer NOT NULL)", (err, result) => {
     if (err) {
       console.error(err);
     } else {
