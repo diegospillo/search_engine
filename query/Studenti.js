@@ -3,7 +3,7 @@ const connection = require("../connectionDB");
 function Create(req, res){
   const pool = connection();
 
-  pool.query("CREATE TABLE Studenti (id integer PRIMARY KEY, nome VARCHAR(20) NOT NULL, cognome VARCHAR(20) NOT NULL, email VARCHAR(20) NOT NULL, id_classe integer NOT NULL)", (err, result) => {
+  pool.query("CREATE TABLE Studenti (id VARCHAR(50) PRIMARY KEY, nome VARCHAR(20) NOT NULL, cognome VARCHAR(20) NOT NULL, email VARCHAR(20) NOT NULL, id_classe integer NOT NULL)", (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -82,7 +82,7 @@ function Alter(req, res){
   const pool = connection();
 
 pool.query(
-  "ALTER TABLE Studenti ALTER COLUMN id TYPE integer;",
+  "ALTER TABLE Studenti ALTER COLUMN id TYPE varchar(50);",
   (err, result) => {
     if (err) {
       console.error(err);

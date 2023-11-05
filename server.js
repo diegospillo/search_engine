@@ -177,6 +177,8 @@ app.get("/get_Classi", (req,res)=>Classi.get(req,res))//USE
 app.get("/insert_Classi", (req,res)=>Classi.insert(req,res))
 app.get("/drop_Classi", (req,res)=>Classi.drop(req,res))
 
+
+//DA CAMBIARE TABELLA STUDENTI ID da INTEGER a VARCHAR(200)!!!!!!!!!!!!!!!!
 app.get("/create_Studenti", (req,res)=>Studenti.create(req,res))
 app.get("/get_Studenti", (req,res)=>Studenti.get(req,res))
 app.get("/insert_Studenti", (req,res)=>Studenti.insert(req,res))//USE
