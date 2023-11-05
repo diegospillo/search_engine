@@ -39,7 +39,7 @@ function Insert(req, res) {
 }
   if(!Exist(pool,client.id)){
   pool.query(
-    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ('${client.id}', '${client.nome}', '${client.cognome}', '${client.email}', ${client.classe});`,
+    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${client.nome}', '${client.cognome}', '${client.email}', ${client.classe});`,
     (err, result) => {
       if (err) {
         console.error(err);
@@ -69,7 +69,7 @@ function Drop(req, res) {
 
 async function Exist(pool,id){
   async function isIdPresent(id) {
-    const results = await pool.query(`SELECT COUNT(*) AS num_rows FROM Studenti WHERE id = '${id}'`);
+    const results = await pool.query(`SELECT COUNT(*) AS num_rows FROM Studenti WHERE id = ${id}`);
     return results.rows[0].num_rows === 1;
   }
   
