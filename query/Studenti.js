@@ -1,5 +1,19 @@
 const connection = require("../connectionDB");
 
+function Create(req, res){
+  const pool = connection();
+
+  pool.query("CREATE TABLE Studenti (id integer PRIMARY KEY, nome VARCHAR(20) NOT NULL, cognome VARCHAR(20) NOT NULL, email VARCHAR(20) NOT NULL, id_classe integer NOT NULL)", (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("Tabella creata con successo!");
+      res.send("Tabella creata con successo!");
+    }
+  });
+}
+
+
 function Get(req, res) {
   const pool = connection();
   
@@ -44,11 +58,11 @@ function Insert(req, res) {
 function Drop(req, res) {
   const pool = connection();
 
-  pool.query("DELETE FROM Studenti WHERE id > 18;", (err, result) => {
+  pool.query("DROP TABLE Studenti", (err, result) => {
     if (err) {
       console.error(err);
     } else {
-      res.send("Righe eliminate con successo!");
+      res.send("Tabella eliminata con successo!");
     }
   });
 }
@@ -73,14 +87,16 @@ pool.query(
     if (err) {
       console.error(err);
     } else {
-      res.end("Dati cambiati con successo!");
+      res.send("Dati cambiati con successo!");
     }
   }
 );
 }
 
 module.exports = {
+  create: Create,
   get: Get,
-  insert: Alter,
+  alter: Alter,
+  insert: Insert,
   drop: Drop
 };
