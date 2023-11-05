@@ -173,19 +173,18 @@ app.get("/elimina_ordine", (req,res) => {
 
 ////////////////////////////////////////////////// QUERY DI CREAZIONE
 
-app.get("/get_Classi", (req,res)=>Classi.get(req,res))
+app.get("/get_Classi", (req,res)=>Classi.get(req,res))//USE
 app.get("/insert_Classi", (req,res)=>Classi.insert(req,res))
 app.get("/drop_Classi", (req,res)=>Classi.drop(req,res))
 
 app.get("/get_Studenti", (req,res)=>Studenti.get(req,res))
-app.get("/insert_Studenti", (req,res)=>Studenti.insert(req,res))
+app.get("/insert_Studenti", (req,res)=>Studenti.insert(req,res))//USE
 app.get("/drop_Studenti", (req,res)=>Studenti.drop(req,res))
 
 app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))
 app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))
 app.get("/alter_Pizze", (req,res)=>Pizze.alter(req,res))
 
-app.get("/create_Ordini", (req,res)=>Ordini.create(req,res))
 app.get("/get_Ordini", (req,res)=>Ordini.get(req,res))
 app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))
 app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))

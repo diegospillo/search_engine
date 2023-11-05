@@ -16,14 +16,21 @@ function Get(req, res) {
 
 function Insert(req, res) {
   const pool = connection();
-
+  const client = {
+    id: req.query.id,
+    nome: req.query.nome,
+    cognome: req.query.cognome,
+    email: req.query.email,
+    classe: req.query.classe
+}
   pool.query(
-    "INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ('116506312363245768991', 'Diego', 'Albani', 'albani.diego@midossi.it', 16);",
+    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, ${client.nome}, ${client.cognome}, ${client.email}, ${client.classe});`,
     (err, result) => {
       if (err) {
         console.error(err);
       } else {
         console.log("Dati inseriti con successo!");
+        res.json({ stato: true })
       }
     }
   );
