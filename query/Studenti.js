@@ -79,10 +79,39 @@ pool.query(
 );
 }
 
+function Truncate(req, res) {
+  const pool = connection();
+
+  pool.query("TRUNCATE Studenti", (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send("Dati tabella eliminata con successo!");
+    }
+  });
+}
+
+function Check_id(req, res){
+  const pool = connection();
+  const id = req.query.id;
+  pool.query(`SELECT * FROM Studenti WHERE id = '${id}';`, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.json({ stato: false })
+    } else {
+      console.log("ID registrato");
+      //console.log(result.rows);
+      res.json({ stato: true })
+    }
+  });
+}
+
 module.exports = {
   create: Create,
   get: Get,
   alter: Alter,
   insert: Insert,
-  drop: Drop
+  drop: Drop,
+  truncate: Truncate,
+  check_id: Check_id
 };

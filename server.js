@@ -177,13 +177,13 @@ app.get("/get_Classi", (req,res)=>Classi.get(req,res))//USE
 app.get("/insert_Classi", (req,res)=>Classi.insert(req,res))
 app.get("/drop_Classi", (req,res)=>Classi.drop(req,res))
 
-
-//DA CAMBIARE TABELLA STUDENTI ID da INTEGER a VARCHAR(200)!!!!!!!!!!!!!!!!
+app.get("/check_id_Studenti", (req,res)=>Studenti.check_id(req,res))//USE
 app.get("/create_Studenti", (req,res)=>Studenti.create(req,res))
 app.get("/get_Studenti", (req,res)=>Studenti.get(req,res))
 app.get("/insert_Studenti", (req,res)=>Studenti.insert(req,res))//USE
 app.get("/drop_Studenti", (req,res)=>Studenti.drop(req,res))
 app.get("/alter_Studenti", (req,res)=>Studenti.alter(req,res))
+app.get("/truncate_Studenti", (req,res)=>Studenti.truncate(req,res))
 
 app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))
 app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))
