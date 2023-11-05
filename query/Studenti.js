@@ -60,6 +60,7 @@ async function Exist(pool,id){
   }
   
   const isPresent = await isIdPresent(id);
+  console.log(isPresent);
   return isPresent;
 }
 
