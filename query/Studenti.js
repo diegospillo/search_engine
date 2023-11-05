@@ -28,7 +28,7 @@ function Get(req, res) {
   });
 }
 
-function Insert(req, res) {
+async function Insert(req, res) {
   const pool = connection();
   const client = {
     id: req.query.id,
@@ -37,7 +37,7 @@ function Insert(req, res) {
     email: req.query.email,
     classe: req.query.classe
 }
-  if(Exist(pool,client.id)==false){
+  if(await Exist(pool,client.id)==false){
   pool.query(
     `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${client.nome}', '${client.cognome}', '${client.email}', ${client.classe});`,
     (err, result) => {
