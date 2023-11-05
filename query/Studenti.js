@@ -53,14 +53,14 @@ function Drop(req, res) {
   });
 }
 
-function Exist(pool,id){
+async function Exist(pool,id){
   async function isIdPresent(id) {
-    const results = pool.query(`SELECT 1 FROM studenti WHERE id = ${id}`);
+    const results = await pool.query(`SELECT 1 FROM studenti WHERE id = ${id}`);
     console.log(results);
     return false;
   }
   
-  const isPresent = isIdPresent(id);
+  const isPresent = await isIdPresent(id);
   return isPresent;
 }
 
