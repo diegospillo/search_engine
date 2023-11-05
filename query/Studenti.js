@@ -37,7 +37,7 @@ function Insert(req, res) {
     email: req.query.email,
     classe: req.query.classe
 }
-  if(!Exist(pool,client.id)){
+  if(Exist(pool,client.id)==false){
   pool.query(
     `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${client.nome}', '${client.cognome}', '${client.email}', ${client.classe});`,
     (err, result) => {
