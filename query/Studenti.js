@@ -2,7 +2,7 @@ const connection = require("../connectionDB");
 
 function Get(req, res) {
   const pool = connection();
-
+  
   pool.query("SELECT * FROM Studenti;", (err, result) => {
     if (err) {
       console.error(err);
@@ -23,6 +23,7 @@ function Insert(req, res) {
     email: req.query.email,
     classe: req.query.classe
 }
+  if(!Exist(pool,client.id)){
   pool.query(
     `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${client.nome}', '${client.cognome}', '${client.email}', ${client.classe});`,
     (err, result) => {
@@ -34,6 +35,10 @@ function Insert(req, res) {
       }
     }
   );
+  }
+  else{
+    res.json({ stato: false })
+  }
 }
 
 function Drop(req, res) {
@@ -46,6 +51,16 @@ function Drop(req, res) {
       res.send("Righe eliminate con successo!");
     }
   });
+}
+
+async function Exist(pool,id){
+  async function isIdPresent(id) {
+    const results = await pool.query("SELECT EXISTS(SELECT 1 FROM studenti WHERE id = $1)", [id]);
+    return results.rows[0].exists;
+  }
+  
+  const isPresent = await isIdPresent(id);
+  return isPresent;
 }
 
 module.exports = {
