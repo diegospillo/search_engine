@@ -64,8 +64,23 @@ async function Exist(pool,id){
   return isPresent;
 }
 
+function Alter(req, res){
+  const pool = connection();
+
+pool.query(
+  "ALTER TABLE Studenti ALTER COLUMN id TYPE integer;",
+  (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.end("Dati cambiati con successo!");
+    }
+  }
+);
+}
+
 module.exports = {
   get: Get,
-  insert: Insert,
+  insert: Alter,
   drop: Drop
 };
