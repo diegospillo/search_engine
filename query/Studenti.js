@@ -100,7 +100,7 @@ function Check_id(req, res){
       res.json({ stato: false })
     } else {
       console.log("ID registrato");
-      //console.log(result.rows);
+      console.log(result.rows);
       res.json({ stato: true })
     }
   });
