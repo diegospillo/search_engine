@@ -37,22 +37,19 @@ async function Insert(req, res) {
     email: req.query.email,
     classe: req.query.classe
 }
-  if(await Exist(pool,client.id)==false){
+
   pool.query(
     `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${client.nome}', '${client.cognome}', '${client.email}', ${client.classe});`,
     (err, result) => {
       if (err) {
         console.error(err);
+        res.json({ stato: false })
       } else {
         console.log("Dati inseriti con successo!");
         res.json({ stato: true })
       }
     }
   );
-  }
-  else{
-    res.json({ stato: false })
-  }
 }
 
 function Drop(req, res) {
@@ -65,17 +62,6 @@ function Drop(req, res) {
       res.send("Tabella eliminata con successo!");
     }
   });
-}
-
-async function Exist(pool,id){
-  async function isIdPresent(id) {
-    const results = await pool.query(`SELECT COUNT(*) AS num_rows FROM Studenti WHERE id = '${id}'`);
-    return results.rows[0].num_rows === 1;
-  }
-  
-  const isPresent = await isIdPresent(id);
-  console.log(isPresent);
-  return isPresent;
 }
 
 function Alter(req, res){
