@@ -91,8 +91,8 @@ function Get_ordini_classe(req, res) {
                   const newOrders = orders.map((order, index) => {
                     return {
                       id: id_pizze[index],
-                      nome: id_studenti_classe[index],
-                      pizze: order.nome,
+                      nome: ordini_classe[index].id_studente,
+                      pizza: order.nome,
                       prezzo: order.prezzo
                     };
                   });
