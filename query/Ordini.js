@@ -87,11 +87,13 @@ function Get_ordini_classe(req, res) {
                   console.error(err);
                 } else {
                   console.log("Dati letti con successo!");
-                  const orders = result3.rows
+                  const orders = result3.rows;
                   const newOrders = orders.map((order, index) => {
                     return {
                       id: id_pizze[index],
-                      ...order,
+                      nome: id_studenti_classe[index],
+                      pizze: order.nome,
+                      prezzo: order.prezzo
                     };
                   });
                   res.send(newOrders);
