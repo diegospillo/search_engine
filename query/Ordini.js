@@ -55,6 +55,27 @@ function Get_ordini_studente(req, res) {
   });
 }
 
+function Get_ordini_classe(req, res) {
+  const pool = connection();
+  const id = req.query.id;
+  pool.query(`SELECT * FROM Studenti WHERE id = '${id}';`, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("Dati letti con successo!");
+      const studente = result.rows;
+      pool.query(`SELECT * FROM Studenti WHERE id_classe=${studente.id_classe};`, (err, result1) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log("Dati letti con successo!");
+          res.send(result1.rows);
+        }
+      });
+    }
+  });
+}
+
 function Insert(req, res) {
   const pool = connection();
   const id_studente = req.query.id_studente;
