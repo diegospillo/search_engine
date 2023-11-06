@@ -12,9 +12,9 @@ function Create(req, res) {
       });
   }
 
-function Get(req, res) {
+function Get_All(req, res) {
   const pool = connection();
-
+  
   pool.query("SELECT * FROM Ordini;", (err, result) => {
     if (err) {
       console.error(err);
@@ -22,6 +22,19 @@ function Get(req, res) {
       console.log("Dati letti con successo!");
       //console.log(result.rows);
       res.send(result.rows);
+    }
+  });
+}
+
+function Get_ordini_studente(req, res) {
+  const pool = connection();
+  const id = req.query.id;
+  pool.query(`SELECT * FROM Ordini WHERE id_studente = '${id}';`, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("Dati letti con successo!");
+      console.log(result.rows);
     }
   });
 }
@@ -71,7 +84,8 @@ function Drop(req, res) {
 module.exports = {
   create: Create,
   alter: Alter,
-  get: Get,
+  get_all: Get_All,
+  get: Get_ordini_studente,
   insert: Insert,
   drop: Drop
 };

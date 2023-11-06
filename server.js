@@ -190,7 +190,8 @@ app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))//USE
 app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))
 app.get("/alter_Pizze", (req,res)=>Pizze.alter(req,res))
 
-app.get("/get_Ordini", (req,res)=>Ordini.get(req,res))
+app.get("/get_all_Ordini", (req,res)=>Ordini.get_all(req,res))
+app.get("/get_all_Ordini", (req,res)=>Ordini.get(req,res))
 app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))
 app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
 
