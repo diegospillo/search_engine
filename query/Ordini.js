@@ -50,9 +50,10 @@ function Get_ordini_studente(req, res) {
 
 function Insert(req, res) {
   const pool = connection();
-
+  const id_studente = req.query.id_studente;
+  const id_pizza = req.query.id_pizza;
   pool.query(
-    "INSERT INTO Ordini (id_Studente, id_Pizza) VALUES ('116506312363245768991', 1);",
+    `INSERT INTO Ordini (id_Studente, id_Pizza) VALUES ('${id_studente}', ${id_pizza});`,
     (err, result) => {
       if (err) {
         console.error(err);
