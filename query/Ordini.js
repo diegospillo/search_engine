@@ -98,8 +98,8 @@ function Get_ordini_classe(req, res) {
                 } else {
                   console.log("Dati letti con successo!");
                   const studente = result4.rows;
-                  console.log("Studente:"+studente);
-                  console.log("Pizza:"+pizza);
+                  console.log("Studente:"+studente.nome);
+                  console.log("Pizza:"+pizza.nome);
                 }
               });
             }
