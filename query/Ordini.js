@@ -70,11 +70,10 @@ function Get_ordini_classe(req, res) {
         } else {//
           const studenti_classe = result1.rows;
           const id_studenti_classe = studenti_classe.map(studente => String(studente.id));
-          console.log(id_studenti_classe);
+          const strg_stud = String(id_studenti_classe);
+          console.log(strg_stud);
           console.log("Dati letti con successo!");//VEDERE ORDINI CLASSE!!!!!!!!!!!
-          const query="SELECT * FROM Ordini WHERE id_studente IN (?)";
-          console.log(query);
-          pool.query((query,[id_studenti_classe]), (err, result2) => {
+          pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${strg_stud})`, (err, result2) => {
             if (err) {
               console.error(err);
             } else {
