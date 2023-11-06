@@ -41,7 +41,14 @@ function Get_ordini_studente(req, res) {
           console.error(err);
         } else {
           console.log("Dati letti con successo!");
-          res.send(result1.rows);
+          const orders = result1.rows
+          const newOrders = orders.map((order, index) => {
+            return {
+              id: id_pizze[index],
+              ...order,
+            };
+          });
+          res.send(newOrders);
         }
       });
     }
