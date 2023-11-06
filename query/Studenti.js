@@ -111,6 +111,20 @@ function Check_id(req, res){
   });
 }
 
+function Get_Studente(req, res) {
+  const pool = connection();
+  const id = req.query.id;
+  pool.query(`SELECT * FROM Studenti WHERE id = '${id}';`, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("Dati letti con successo!");
+      //console.log(result.rows);
+      res.send(result.rows);
+    }
+  });
+}
+
 module.exports = {
   create: Create,
   get: Get,
@@ -118,5 +132,6 @@ module.exports = {
   insert: Insert,
   drop: Drop,
   truncate: Truncate,
-  check_id: Check_id
+  check_id: Check_id,
+  get_studente: Get_Studente
 };
