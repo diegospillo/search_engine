@@ -80,7 +80,23 @@ function Get_ordini_classe(req, res) {
               console.error(err);
             } else {
               console.log("Dati letti con successo!");
-              res.send(result2.rows);
+              const ordini_classe = result2.rows;
+              const id_pizze = ordini_classe.map(ordine => ordine.id_pizza);
+              pool.query(`SELECT * FROM Pizze WHERE id IN (${id_pizze});`, (err, result3) => {
+                if (err) {
+                  console.error(err);
+                } else {
+                  console.log("Dati letti con successo!");
+                  const orders = result3.rows
+                  const newOrders = orders.map((order, index) => {
+                    return {
+                      id: id_pizze[index],
+                      ...order,
+                    };
+                  });
+                  res.send(newOrders);
+                }
+              });
             }
           });
         }
