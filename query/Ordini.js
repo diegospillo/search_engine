@@ -64,7 +64,7 @@ function Get_ordini_classe(req, res) {
     } else {
       console.log("Dati letti con successo!");
       const studente = result.rows;
-      pool.query(`SELECT * FROM Studenti WHERE id_classe=${studente.id_classe};`, (err, result1) => {
+      pool.query(`SELECT * FROM Studenti WHERE id_classe=${studente[0].id_classe};`, (err, result1) => {
         if (err) {
           console.error(err);
         } else {
