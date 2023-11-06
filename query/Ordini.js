@@ -90,19 +90,20 @@ function Get_ordini_classe(req, res) {
                 } else {
                   console.log("Dati letti con successo!");
                   const pizza = result3.rows;
-                  console.log("Pizza:"+pizza);
-                }
-              });
-              pool.query(`SELECT * FROM Studenti WHERE id = '${ordine.id_studente}';`, (err, result3) => {
+            
+              pool.query(`SELECT * FROM Studenti WHERE id = '${ordine.id_studente}';`, (err, result4) => {
                 console.log("Ordine"+index)
                 if (err) {
                   console.error(err);
                 } else {
                   console.log("Dati letti con successo!");
-                  const studente = result3.rows;
+                  const studente = result4.rows;
                   console.log("Studente:"+studente);
+                  console.log("Pizza:"+pizza);
                 }
               });
+            }
+          });
             })
             res.send(true);
             }
