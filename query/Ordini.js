@@ -85,7 +85,7 @@ module.exports = {
   create: Create,
   alter: Alter,
   get_all: Get_All,
-  get: Get_ordini_studente,
+  get_ordini_studente: Get_ordini_studente,
   insert: Insert,
   drop: Drop
 };
