@@ -191,8 +191,10 @@ app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))
 app.get("/alter_Pizze", (req,res)=>Pizze.alter(req,res))
 
 app.get("/get_all_Ordini", (req,res)=>Ordini.get_all(req,res))
-app.get("/get_Ordini_Studente", (req,res)=>Ordini.get_ordini_studente(req,res))
+app.get("/get_Ordini_Studente", (req,res)=>Ordini.get_ordini_studente(req,res))//USE
+app.get("/get_Ordini_Classe", (req,res)=>Ordini.get_ordini_classe(req,res))
 app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))
 app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
+
 
 app.listen(5000, () => {console.log("Server start on port 5000")})

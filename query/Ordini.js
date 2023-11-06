@@ -124,6 +124,7 @@ module.exports = {
   alter: Alter,
   get_all: Get_All,
   get_ordini_studente: Get_ordini_studente,
+  get_ordini_classe: Get_ordini_classe,
   insert: Insert,
   drop: Drop
 };
