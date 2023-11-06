@@ -69,7 +69,9 @@ function Get_ordini_classe(req, res) {
           console.error(err);
         } else {//
           const studenti_classe = result1.rows;
-          const id_studenti_classe = studenti_classe.map(studente => `${studente.id}`);
+          const id_studenti_classe = studenti_classe.map(studente => {
+            return ("'"+studente.id+"'");
+          });
           const strg_stud = String(id_studenti_classe);
           console.log(strg_stud);
           console.log("Dati letti con successo!");//VEDERE ORDINI CLASSE!!!!!!!!!!!
