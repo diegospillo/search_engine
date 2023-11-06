@@ -81,24 +81,30 @@ function Get_ordini_classe(req, res) {
             } else {
               console.log("Dati letti con successo!");
               const ordini_classe = result2.rows;
-              const id_pizze = ordini_classe.map(ordine => ordine.id_pizza);
-              pool.query(`SELECT * FROM Pizze WHERE id IN (${id_pizze});`, (err, result3) => {
+              //const id_pizze = ordini_classe.map(ordine => ordine.id_pizza);
+              ordini_classe.map((ordine,index)=>{
+              pool.query(`SELECT * FROM Pizze WHERE id = ${ordine.id_pizza};`, (err, result3) => {
+                console.log("Ordine"+index)
                 if (err) {
                   console.error(err);
                 } else {
                   console.log("Dati letti con successo!");
-                  const orders = result3.rows;
-                  const newOrders = orders.map((order, index) => {
-                    return {
-                      id: id_pizze[index],
-                      nome: ordini_classe[index].id_studente,
-                      pizza: order.nome,
-                      prezzo: order.prezzo
-                    };
-                  });
-                  res.send(newOrders);
+                  const pizza = result3.rows;
+                  console.log("Pizza:"+pizza);
                 }
               });
+              pool.query(`SELECT * FROM Studenti WHERE id = '${ordine.id_studente}';`, (err, result3) => {
+                console.log("Ordine"+index)
+                if (err) {
+                  console.error(err);
+                } else {
+                  console.log("Dati letti con successo!");
+                  const studente = result3.rows;
+                  console.log("Studente:"+studente);
+                }
+              });
+            })
+            res.send(true);
             }
           });
         }
