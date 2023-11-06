@@ -34,7 +34,7 @@ function Get_ordini_studente(req, res) {
       console.error(err);
     } else {
       console.log("Dati letti con successo!");
-      console.log(result.rows);
+      res.send(result.rows);
     }
   });
 }
