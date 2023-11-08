@@ -40,14 +40,14 @@ function Get_ordini_studente(req, res) {
           console.error(err);
         } else {
           const pizze = result1.rows;
-          /*const newOrders = ordini.map((order, index) => {
+          const newOrders = ordini.map((order, index) => {
           return {
               id: order.id,
               nome: pizze[index].nome,
               prezzo: pizze[index].prezzo
             };
-          });*/
-          res.send(pizze);
+          });
+          res.send(newOrders);
         }
       });
     }
