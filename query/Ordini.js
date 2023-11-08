@@ -63,32 +63,30 @@ function Get_ordini_classe(req, res) {
     if (err) {
       console.error(err);
     } else {
-      console.log("Dati letti con successo!");
       const studente = result.rows;
       pool.query(`SELECT * FROM Studenti WHERE id_classe=${studente[0].id_classe};`, (err, result1) => {
         if (err) {
           console.error(err);
-        } else {//
+        } else {
           const studenti_classe = result1.rows;
           const id_studenti_classe = studenti_classe.map(studente => {
             return ("'"+studente.id+"'");
           });
           const strg_stud = String(id_studenti_classe);
-          console.log(strg_stud);
           console.log("Dati letti con successo!");//VEDERE ORDINI CLASSE!!!!!!!!!!!
           pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${strg_stud})`, (err, result2) => {
             if (err) {
               console.error(err);
             } else {
-              console.log("Dati letti con successo!");
-              //const ordini_classe = result2.rows;
-              pool.query(`SELECT Pizze.id, Pizze.nome, Pizze.prezzo FROM Pizze JOIN Ordini ON Pizze.id = Ordini.id_pizza WHERE ordini.id = 1`, (err, result3) => {
+              const ordini_classe = result2.rows;
+              const id_ordini = ordini_classe.map(ordine => ordine.id);
+              pool.query(`SELECT Pizze.id, Pizze.nome, Pizze.prezzo FROM Pizze JOIN Ordini ON Pizze.id = Ordini.id_pizza WHERE ordini.id IN (${id_ordini})`, (err, result3) => {
                 if (err) {
                   console.error(err);
                 } else {
                   console.log("Dati letti con successo!");
                   const pizza = result3.rows;
-                  pool.query(`SELECT Studenti.nome, Studenti.cognome FROM Studenti JOIN Ordini ON Studenti.id = Ordini.id_studente WHERE ordini.id = 1`, (err, result4) => {
+                  pool.query(`SELECT Studenti.nome, Studenti.cognome FROM Studenti JOIN Ordini ON Studenti.id = Ordini.id_studente WHERE ordini.id IN (${id_ordini})`, (err, result4) => {
                     if (err) {
                       console.error(err);
                     } else {
