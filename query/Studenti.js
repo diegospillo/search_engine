@@ -11,6 +11,7 @@ function Create(req, res){
       res.send("Tabella creata con successo!");
     }
   });
+  pool.close();
 }
 
 
@@ -26,6 +27,7 @@ function Get(req, res) {
       res.send(result.rows);
     }
   });
+  pool.close();
 }
 
 async function Insert(req, res) {
@@ -50,6 +52,7 @@ async function Insert(req, res) {
       }
     }
   );
+  pool.close();
 }
 
 function Drop(req, res) {
@@ -62,6 +65,7 @@ function Drop(req, res) {
       res.send("Tabella eliminata con successo!");
     }
   });
+  pool.close();
 }
 
 function Alter(req, res){
@@ -77,6 +81,7 @@ pool.query(
     }
   }
 );
+pool.close();
 }
 
 function Truncate(req, res) {
@@ -89,6 +94,7 @@ function Truncate(req, res) {
       res.send("Dati tabella eliminata con successo!");
     }
   });
+  pool.close();
 }
 
 function Check_id(req, res){
@@ -109,6 +115,7 @@ function Check_id(req, res){
       }
     }
   });
+  pool.close();
 }
 
 function Get_Studente(req, res) {
@@ -138,6 +145,7 @@ function Get_Studente(req, res) {
       });
     }
   });
+  pool.close();
 }
 
 module.exports = {

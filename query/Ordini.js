@@ -10,6 +10,7 @@ function Create(req, res) {
           res.send("Tabella creata con successo!");
         }
       });
+    pool.close();
   }
 
 function Get_All(req, res) {
@@ -24,6 +25,7 @@ function Get_All(req, res) {
       res.send(result.rows);
     }
   });
+  pool.close();
 }
 
 function Get_ordini_studente(req, res) {
@@ -52,6 +54,7 @@ function Get_ordini_studente(req, res) {
       });
     }
   });
+  pool.close();
 }
 
 //FINIRE GET ORDINI CLASSE!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -108,6 +111,7 @@ function Get_ordini_classe(req, res) {
       });
     }
   });
+  pool.close();
 }
 
 function Insert(req, res) {
@@ -134,6 +138,7 @@ function Insert(req, res) {
   );
   });
   res.redirect(`http://localhost:5173/ordine?id=${id_studente}&stato=true`)
+  pool.close();
 }
 
 function Alter(req, res){
@@ -149,6 +154,7 @@ function Alter(req, res){
       }
     }
   );
+  pool.close();
 }
 
 function Drop(req, res) {
@@ -161,6 +167,7 @@ function Drop(req, res) {
       res.send("Righe eliminate con successo!");
     }
   });
+  pool.close();
 }
 
 module.exports = {
