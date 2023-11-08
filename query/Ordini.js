@@ -33,7 +33,6 @@ function Get_ordini_studente(req, res) {
     if (err) {
       console.error(err);
     } else {
-      console.log("Dati letti con successo!");
       const ordini = result.rows;
       const id_pizze = ordini.map(ordine => ordine.id_pizza);
       pool.query(`SELECT * FROM Pizze WHERE id IN (${id_pizze});`, (err, result1) => {
@@ -41,14 +40,14 @@ function Get_ordini_studente(req, res) {
           console.error(err);
         } else {
           const pizze = result1.rows;
-          const newOrders = ordini.map((order, index) => {
+          /*const newOrders = ordini.map((order, index) => {
           return {
               id: order.id,
               nome: pizze[index].nome,
               prezzo: pizze[index].prezzo
             };
-          });
-          res.send(newOrders);
+          });*/
+          res.send(pizze);
         }
       });
     }
