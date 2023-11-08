@@ -133,7 +133,7 @@ function Get_Studente(req, res) {
               classe: classe[index].anno + classe[index].sezione
             };
           });
-          res.send(result1.rows);
+          res.send(new_studente);
         }
       });
     }
