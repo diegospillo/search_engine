@@ -118,9 +118,24 @@ function Get_Studente(req, res) {
     if (err) {
       console.error(err);
     } else {
-      console.log("Dati letti con successo!");
-      //console.log(result.rows);
-      res.send(result.rows);
+      const studente = result.rows;
+      pool.query(`SELECT * FROM Classi WHERE id = ${studente[0].id_classe};`, (err, result1) => {
+        if (err) {
+          console.error(err);
+        } else {
+          const classe = result1.rows;
+          const new_studente = studente.map((studente1, index) => {
+            return {
+              id: studente1.id,
+              nome: studente1.nome,
+              cognome: studente1.cognome,
+              email: studente1.email,
+              classe: classe[index].anno + classe[index].sezione
+            };
+          });
+          res.send(result1.rows);
+        }
+      });
     }
   });
 }
