@@ -105,7 +105,6 @@ function Get_ordini_classe(req, res) {
                       res.send(newOrder);
                     }
                   });
-                  res.send(ordine);
                 }
               });
             }
