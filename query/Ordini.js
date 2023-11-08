@@ -85,14 +85,10 @@ function Get_ordini_classe(req, res) {
               pool.query(`SELECT
               Pizze.id,
               Pizze.nome,
-              Pizze.prezzo,
-              Studenti.id,
-              Studenti.nome,
-              Studenti.cognome
+              Pizze.prezzo
           FROM
               Pizze
               JOIN Ordini ON Pizze.id = Ordini.id_pizza
-              JOIN Studenti ON Ordini.id_studente = Studenti.id
           WHERE
               ordini.id = 1
           `, (err, result3) => {
