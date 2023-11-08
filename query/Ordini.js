@@ -119,7 +119,7 @@ function Insert(req, res) {
     var id_pizze = [];
     while(true){
         let id_pizza_ord = req.query["ordine"+cont];
-        if(ordine){
+        if(id_pizza_ord){
             id_pizze.push(id_pizza_ord);
             cont++;
         }
