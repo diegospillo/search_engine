@@ -41,11 +41,12 @@ function Get_ordini_studente(req, res) {
           console.error(err);
         } else {
           console.log("Dati letti con successo!");
-          const orders = result1.rows
-          const newOrders = orders.map((order, index) => {
+          const pizze = result1.rows
+          const newOrders = ordini.map((order, index) => {
             return {
-              id: id_pizze[index],
-              ...order,
+              id: order.id,
+              nome: pizze[index].nome,
+              prezzo: pizze[index].prezzo
             };
           });
           res.send(newOrders);
@@ -84,18 +85,16 @@ function Get_ordini_classe(req, res) {
                 if (err) {
                   console.error(err);
                 } else {
-                  console.log("Dati letti con successo!");
                   const pizza = result3.rows;
                   pool.query(`SELECT Studenti.nome, Studenti.cognome FROM Studenti JOIN Ordini ON Studenti.id = Ordini.id_studente WHERE ordini.id IN (${id_ordini})`, (err, result4) => {
                     if (err) {
                       console.error(err);
                     } else {
-                      console.log("Dati letti con successo!");
                       const studente = result4.rows;
-                      const newOrder = studente.map((studente1, index) => {
+                      const newOrder = ordini_classe.map((ordine, index) => {
                         return {
-                          id: 1,
-                          nome: studente1.nome + " " + studente1.cognome,
+                          id: ordine.id,
+                          nome: studente[index].nome + " " + studente[index].cognome,
                           pizza: pizza[index].nome,
                           prezzo: pizza[index].prezzo
                         };
