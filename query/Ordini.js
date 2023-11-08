@@ -114,18 +114,28 @@ function Get_ordini_classe(req, res) {
 
 function Insert(req, res) {
   const pool = connection();
-  const id_studente = req.query.id_studente;
-  const id_pizza = req.query.id_pizza;
+  const id_studente = req.query.id;
+    var cont = 0;
+    var id_pizze = [];
+    while(true){
+        let id_pizza_ord = req.query["ordine"+cont];
+        if(ordine){
+            id_pizze.push(id_pizza_ord);
+            cont++;
+        }
+        else break;
+    }
+  id_pizze.forEach(id_pizza => {
   pool.query(
     `INSERT INTO Ordini (id_Studente, id_Pizza) VALUES ('${id_studente}', ${id_pizza});`,
     (err, result) => {
       if (err) {
         console.error(err);
-      } else {
-        res.send("Dati inseriti con successo!");
       }
     }
   );
+  });
+  res.redirect(`http://localhost:5173/ordine?id=${id_studente}&stato=true`)
 }
 
 function Alter(req, res){
