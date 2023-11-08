@@ -94,13 +94,12 @@ function Get_ordini_classe(req, res) {
                     } else {
                       console.log("Dati letti con successo!");
                       const studente = result4.rows;
-                      const newOrder = studente.map((order, index) => {
+                      const newOrder = studente.map((studente1, index) => {
                         return {
                           id: 1,
-                          nome: order.nome + " " + order.cognome,
+                          nome: studente1.nome + " " + studente1.cognome,
                           pizza: pizza[index].nome,
-                          prezzo: pizza[index].prezzo,
-                          data: order.data
+                          prezzo: pizza[index].prezzo
                         };
                       });
                       res.send(newOrder);
