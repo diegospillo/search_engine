@@ -40,10 +40,9 @@ function Get_ordini_studente(req, res) {
         if (err) {
           console.error(err);
         } else {
-          console.log("Dati letti con successo!");
           const pizze = result1.rows;
           const newOrders = ordini.map((order, index) => {
-            return {
+          return {
               id: order.id,
               nome: pizze[index].nome,
               prezzo: pizze[index].prezzo
