@@ -41,7 +41,7 @@ function Get_ordini_studente(req, res) {
           console.error(err);
         } else {
           console.log("Dati letti con successo!");
-          const pizze = result1.rows
+          const pizze = result1.rows;
           const newOrders = ordini.map((order, index) => {
             return {
               id: order.id,
