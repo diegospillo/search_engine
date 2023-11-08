@@ -55,6 +55,7 @@ function Get_ordini_studente(req, res) {
   });
 }
 
+//FINIRE GET ORDINI CLASSE!!!!!!!!!!!!!!!!!!!!!!!!!!
 function Get_ordini_classe(req, res) {
   const pool = connection();
   const id = req.query.id;
@@ -81,31 +82,7 @@ function Get_ordini_classe(req, res) {
             } else {
               console.log("Dati letti con successo!");
               const ordini_classe = result2.rows;
-              //const id_pizze = ordini_classe.map(ordine => ordine.id_pizza);
-              ordini_classe.map((ordine,index)=>{
-              pool.query(`SELECT * FROM Pizze WHERE id = ${ordine.id_pizza};`, (err, result3) => {
-                console.log("Ordine"+index)
-                if (err) {
-                  console.error(err);
-                } else {
-                  console.log("Dati letti con successo!");
-                  const pizza = result3.rows;
-            
-              pool.query(`SELECT * FROM Studenti WHERE id = '${ordine.id_studente}';`, (err, result4) => {
-                console.log("Ordine"+index)
-                if (err) {
-                  console.error(err);
-                } else {
-                  console.log("Dati letti con successo!");
-                  const studente = result4.rows;
-                  console.log("Studente:"+studente.nome);
-                  console.log("Pizza:"+pizza.nome);
-                }
-              });
-            }
-          });
-            })
-            res.send(true);
+              res.send(ordini_classe);
             }
           });
         }
