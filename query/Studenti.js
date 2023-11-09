@@ -139,7 +139,6 @@ function Get_Studente(req, res) {
               classe: classe[index].anno + classe[index].sezione
             };
           });
-          res.setHeader('Content-Type', 'application/json');
           res.send(new_studente);
         }
       });

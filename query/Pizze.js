@@ -21,8 +21,6 @@ function Get(req, res) {
       console.error(err);
     } else {
       console.log("Dati letti con successo!");
-      //console.log(result.rows);
-      res.setHeader('Content-Type', 'application/json');
       res.send(result.rows);
     }
   });
@@ -54,7 +52,7 @@ function Alter(req, res){
       if (err) {
         console.error(err);
       } else {
-        res.end("Dati cambiati con successo!");
+        res.send("Dati cambiati con successo!");
       }
     }
   );

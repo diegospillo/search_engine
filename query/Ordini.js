@@ -21,8 +21,6 @@ function Get_All(req, res) {
       console.error(err);
     } else {
       console.log("Dati letti con successo!");
-      //console.log(result.rows);
-      res.setHeader('Content-Type', 'application/json');
       res.send(result.rows);
     }
   });
@@ -50,7 +48,6 @@ function Get_ordini_studente(req, res) {
               prezzo: pizze[index].prezzo
             };
           });
-          res.setHeader('Content-Type', 'application/json');
           res.send(newOrders);
         }
       });
@@ -102,7 +99,6 @@ function Get_ordini_classe(req, res) {
                           prezzo: pizza[index].prezzo
                         };
                       });
-                      res.setHeader('Content-Type', 'application/json');
                       res.send(newOrder);
                     }
                   });
