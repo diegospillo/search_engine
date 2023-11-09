@@ -8,9 +8,9 @@ function Create(req, res) {
           console.error(err);
         } else {
           res.send("Tabella creata con successo!");
+          pool.end();
         }
       });
-    pool.end();
   }
 
 function Get(req, res) {
@@ -22,9 +22,9 @@ function Get(req, res) {
     } else {
       console.log("Dati letti con successo!");
       res.send(result.rows);
+      pool.end();
     }
   });
-  pool.end();
 }
 
 function Insert(req, res) {
@@ -37,10 +37,10 @@ function Insert(req, res) {
         console.error(err);
       } else {
         res.send("Dati inseriti con successo!");
+        pool.end();
       }
     }
   );
-  pool.end();
 }
 
 function Alter(req, res){
@@ -53,10 +53,10 @@ function Alter(req, res){
         console.error(err);
       } else {
         res.send("Dati cambiati con successo!");
+        pool.end();
       }
     }
   );
-  pool.end();
 }
 
 function Drop(req, res) {
@@ -67,9 +67,9 @@ function Drop(req, res) {
       console.error(err);
     } else {
       res.send("Righe eliminate con successo!");
+      pool.end();
     }
   });
-  pool.end();
 }
 
 module.exports = {

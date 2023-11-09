@@ -9,9 +9,9 @@ function Create(req, res){
     } else {
       console.log("Tabella creata con successo!");
       res.send("Tabella creata con successo!");
+      pool.end();
     }
   });
-  pool.end();
 }
 
 
@@ -23,10 +23,9 @@ function Get(req, res) {
     } else {
       console.log("Dati letti con successo!");
       res.send(result.rows);
+      pool.end();
     }
   });
-
-  pool.end();
 }
 
 async function Insert(req, res) {
@@ -45,13 +44,14 @@ async function Insert(req, res) {
       if (err) {
         console.error(err);
         res.json({ stato: false })
+        pool.end();
       } else {
         console.log("Dati inseriti con successo!");
-        res.json({ stato: true })
+        res.json({ stato: true });
+        pool.end();
       }
     }
   );
-  pool.end();
 }
 
 function Drop(req, res) {
@@ -62,9 +62,9 @@ function Drop(req, res) {
       console.error(err);
     } else {
       res.send("Tabella eliminata con successo!");
+      pool.end();
     }
   });
-  pool.end();
 }
 
 function Alter(req, res){
@@ -77,10 +77,10 @@ pool.query(
       console.error(err);
     } else {
       res.send("Dati cambiati con successo!");
+      pool.end();
     }
   }
 );
-pool.end();
 }
 
 function Truncate(req, res) {
@@ -91,9 +91,9 @@ function Truncate(req, res) {
       console.error(err);
     } else {
       res.send("Dati tabella eliminata con successo!");
+      pool.end();
     }
   });
-  pool.end();
 }
 
 function Check_id(req, res){
@@ -106,15 +106,16 @@ function Check_id(req, res){
     } else {
       if(result.rows.length>0){
         console.log("ID registrato");
-        res.json({ stato: true })
+        res.json({ stato: true });
+        pool.end();
       }
       else{
         console.log("ID non registrato");
-        res.json({ stato: false })
+        res.json({ stato: false });
+        pool.end();
       }
     }
   });
-  pool.end();
 }
 
 function Get_Studente(req, res) {
@@ -140,11 +141,11 @@ function Get_Studente(req, res) {
             };
           });
           res.send(new_studente);
+          pool.end();
         }
       });
     }
   });
-  pool.end();
 }
 
 module.exports = {

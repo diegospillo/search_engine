@@ -10,9 +10,9 @@ function Get(req, res) {
       console.log("Dati letti con successo!");
       //console.log(result.rows);
       res.send(result.rows);
+      pool.end();
     }
   });
-  pool.end();
 }
 
 function Insert(req, res) {
@@ -25,10 +25,10 @@ function Insert(req, res) {
         console.error(err);
       } else {
         console.log("Dati inseriti con successo!");
+        pool.end();
       }
     }
   );
-  pool.end();
 }
 
 function Drop(req, res) {
@@ -39,9 +39,9 @@ function Drop(req, res) {
       console.error(err);
     } else {
       res.send("Righe eliminate con successo!");
+      pool.end();
     }
   });
-  pool.end();
 }
 
 module.exports = {
