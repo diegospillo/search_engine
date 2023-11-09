@@ -23,9 +23,7 @@ function Get(req, res) {
       console.error(err);
     } else {
       console.log("Dati letti con successo!");
-      //console.log(result.rows);
-      res.setHeader('Content-Type', 'application/json');
-      res.json(result.rows);
+      res.send(result.rows);
     }
   });
   pool.close();

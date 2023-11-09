@@ -9,7 +9,6 @@ function Get(req, res) {
     } else {
       console.log("Dati letti con successo!");
       //console.log(result.rows);
-      res.setHeader('Content-Type', 'application/json');
       res.send(result.rows);
     }
   });
