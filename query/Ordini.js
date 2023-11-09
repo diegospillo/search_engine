@@ -65,8 +65,8 @@ function Get_ordini_classe(req, res) {
       console.error(err);
     } else {
       const studente = result.rows;
-      res.send(studente);
-      /*pool.query(`SELECT * FROM Studenti WHERE id_classe=${studente[0].id_classe};`, (err, result1) => {
+      const id_studente = studente.map(stud1 => stud1.id);
+      pool.query(`SELECT * FROM Studenti WHERE id_classe IN (${id_studente});`, (err, result1) => {
         if (err) {
           console.error(err);
         } else {
@@ -109,7 +109,7 @@ function Get_ordini_classe(req, res) {
             }
           });
         }
-      });*/
+      });
     }
   });
 }
