@@ -17,7 +17,7 @@ function Create(req, res){
 
 function Get(req, res) {
   const pool = connection();
-  if(pool){
+  if(pool.connect()){
     res.send("connessione avvenuta con successo!!");
   }
   else{
