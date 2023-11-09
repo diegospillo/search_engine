@@ -24,7 +24,8 @@ function Get(req, res) {
     } else {
       console.log("Dati letti con successo!");
       //console.log(result.rows);
-      res.send(result.rows);
+      res.setHeader('Content-Type', 'application/json');
+      res.json(result.rows);
     }
   });
   pool.close();
@@ -140,6 +141,7 @@ function Get_Studente(req, res) {
               classe: classe[index].anno + classe[index].sezione
             };
           });
+          res.setHeader('Content-Type', 'application/json');
           res.send(new_studente);
         }
       });
