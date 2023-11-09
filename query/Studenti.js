@@ -17,21 +17,16 @@ function Create(req, res){
 
 function Get(req, res) {
   const pool = connection();
-  if(pool.connect()){
-    res.send("connessione avvenuta con successo!!");
-  }
-  else{
-    res.send("errore!!");
-  }
-  /*pool.query("SELECT * FROM Studenti;", (err, result) => {
+  pool.query("SELECT * FROM Studenti;", (err, result) => {
     if (err) {
       console.error(err);
     } else {
       console.log("Dati letti con successo!");
       res.send(result.rows);
     }
-  });*/
-  pool.close();
+  });
+
+  pool.end();
 }
 
 async function Insert(req, res) {
