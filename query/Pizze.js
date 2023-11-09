@@ -10,7 +10,7 @@ function Create(req, res) {
           res.send("Tabella creata con successo!");
         }
       });
-    pool.close();
+    pool.end();
   }
 
 function Get(req, res) {
@@ -26,7 +26,7 @@ function Get(req, res) {
       res.send(result.rows);
     }
   });
-  pool.close();
+  pool.end();
 }
 
 function Insert(req, res) {
@@ -42,7 +42,7 @@ function Insert(req, res) {
       }
     }
   );
-  pool.close();
+  pool.end();
 }
 
 function Alter(req, res){
@@ -58,7 +58,7 @@ function Alter(req, res){
       }
     }
   );
-  pool.close();
+  pool.end();
 }
 
 function Drop(req, res) {
@@ -71,7 +71,7 @@ function Drop(req, res) {
       res.send("Righe eliminate con successo!");
     }
   });
-  pool.close();
+  pool.end();
 }
 
 module.exports = {
