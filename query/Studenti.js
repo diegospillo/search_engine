@@ -18,7 +18,10 @@ function Create(req, res){
 function Get(req, res) {
   const pool = connection();
   if(pool){
-    console.log("connessione avvenuta con successo!!")
+    res.send("connessione avvenuta con successo!!");
+  }
+  else{
+    res.send("errore!!");
   }
   /*pool.query("SELECT * FROM Studenti;", (err, result) => {
     if (err) {
