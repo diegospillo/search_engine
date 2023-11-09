@@ -16,7 +16,7 @@ function Create(req, res){
 
 
 function Get(req, res) {
-  const pool = connection();
+  /*const pool = connection();
   
   pool.query("SELECT * FROM Studenti;", (err, result) => {
     if (err) {
@@ -26,7 +26,8 @@ function Get(req, res) {
       res.send(result.rows);
     }
   });
-  pool.close();
+  pool.close();*/
+  res.send("porco dio");
 }
 
 async function Insert(req, res) {
