@@ -16,18 +16,19 @@ function Create(req, res){
 
 
 function Get(req, res) {
-  /*const pool = connection();
-  
-  pool.query("SELECT * FROM Studenti;", (err, result) => {
+  const pool = connection();
+  if(pool){
+    console.log("connessione avvenuta con successo!!")
+  }
+  /*pool.query("SELECT * FROM Studenti;", (err, result) => {
     if (err) {
       console.error(err);
     } else {
       console.log("Dati letti con successo!");
       res.send(result.rows);
     }
-  });
-  pool.close();*/
-  res.send("porco dio");
+  });*/
+  pool.close();
 }
 
 async function Insert(req, res) {
