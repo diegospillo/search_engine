@@ -37,7 +37,7 @@ app.get("/get_Ordini_Studente", (req,res)=>Ordini.get_ordini_studente(req,res))/
 app.get("/get_Ordini_Classe", (req,res)=>Ordini.get_ordini_classe(req,res))//USE
 app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))//USE
 app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
-app.get("/drop_Ordine", (req,res)=>Ordini.alter(req,res))//USE
+app.get("/drop_Ordine", (req,res)=>Ordini.drop(req,res))//USE
 
 
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})
