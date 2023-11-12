@@ -41,15 +41,12 @@ function Get_ordini_studente(req, res) {
           console.error(err);
         } else {
           const pizze = result1.rows;
-          /*res.send({
-            ordini:ordini,
-            pizze:pizze
-          });*/
           const newOrders = ordini.map((order) => {
+            const one_pizza = pizze.find((item) => item.id === order.id_pizza);
             return {
               id: order.id,
-              nome: pizze.find((item) => item.id === order.id_pizza).nome,
-              prezzo: pizze.find((item) => item.id === order.id_pizza).prezzo,
+              nome: one_pizza.nome,
+              prezzo: one_pizza.prezzo
             };
           });
           res.send(newOrders);
@@ -91,18 +88,20 @@ function Get_ordini_classe(req, res) {
                 if (err) {
                   console.error(err);
                 } else {
-                  const pizza = result3.rows;
+                  const pizze = result3.rows;
                   pool.query(`SELECT Studenti.nome, Studenti.cognome FROM Studenti JOIN Ordini ON Studenti.id = Ordini.id_studente WHERE ordini.id IN (${id_ordini})`, (err, result4) => {
                     if (err) {
                       console.error(err);
                     } else {
                       const studente = result4.rows;
-                      const newOrder = ordini_classe.map((ordine, index) => {
+                      const newOrder = ordini_classe.map((ordine) => {
+                        const one_stud = studente.find((item) => item.id === order.id_studente);
+                        const one_pizza = pizze.find((item) => item.id === order.id_pizza);
                         return {
                           id: ordine.id,
-                          nome: studente[index].nome + " " + studente[index].cognome,
-                          pizza: pizza[index].nome,
-                          prezzo: pizza[index].prezzo
+                          nome: one_stud.nome + " " + one_stud.cognome,
+                          pizza: one_pizza.nome,
+                          prezzo: one_pizza.prezzo
                         };
                       });
                       res.send(newOrder);
