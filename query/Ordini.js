@@ -26,7 +26,7 @@ function Get_All(req, res) {
     }
   });
 }
-
+//HO CAPITO L ERRORE RISOLVILO!!!!!!!!!!!!!!!!!!!!
 function Get_ordini_studente(req, res) {
   const pool = connection();
   const id = req.query.id;
@@ -41,19 +41,19 @@ function Get_ordini_studente(req, res) {
           console.error(err);
         } else {
           const pizze = result1.rows;
-          res.send({
+          /*res.send({
             ordini:ordini,
             pizze:pizze
-          });
-          /*const newOrders = ordini.map((order, index) => {
-          return {
+          });*/
+          const newOrders = ordini.map((order) => {
+            return {
               id: order.id,
-              nome: pizze[index].nome,
-              prezzo: pizze[index].prezzo
+              nome: pizze.find((item) => item.id === order.id_pizza).nome,
+              prezzo: pizze.find((item) => item.id === order.id_pizza).prezzo,
             };
           });
           res.send(newOrders);
-          */
+          
           pool.end();
         }
       });

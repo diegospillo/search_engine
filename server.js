@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors');
+const PORT = process.env.PORT || 5000;
 
 const Classi = require('./query/Classi');
 const Studenti = require('./query/Studenti');
@@ -66,4 +67,4 @@ app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))//USE
 app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
 
 
-app.listen(5000, () => {console.log("Server start on port 5000")})
+app.listen(PORT, () => {console.log("Server start on port " + PORT)})
