@@ -29,7 +29,7 @@ function Get_All(req, res) {
     }
   });
 }
-//HO CAPITO L ERRORE RISOLVILO!!!!!!!!!!!!!!!!!!!!
+
 function Get_ordini_studente(req, res) {
   const pool = connection();
   const id = req.query.id;
@@ -69,7 +69,6 @@ function Get_ordini_studente(req, res) {
   );
 }
 
-//FINIRE GET ORDINI CLASSE!!!!!!!!!!!!!!!!!!!!!!!!!!
 function Get_ordini_classe(req, res) {
   const pool = connection();
   const id = req.query.id;
@@ -175,12 +174,13 @@ function Alter(req, res) {
 
 function Drop(req, res) {
   const pool = connection();
-
-  pool.query("DELETE FROM Studenti WHERE id > 18;", (err, result) => {
+  const id_studente = req.query.id_client;
+  const id_ordine = req.query.id_ordine;
+  pool.query(`DELETE FROM Ordini WHERE id = ${id_ordine};`, (err, result) => {
     if (err) {
       console.error(err);
     } else {
-      res.send("Righe eliminate con successo!");
+      res.redirect(`http://localhost:5173/ordine?id=${id_studente}&stato=true`);
       pool.end();
     }
   });
