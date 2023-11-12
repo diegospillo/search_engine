@@ -38,6 +38,7 @@ function Get_ordini_studente(req, res) {
     (err, result) => {
       if (err) {
         console.error(err);
+        res.send([]);
       } else {
         const ordini = result.rows;
         const id_pizze = ordini.map((ordine) => ordine.id_pizza);
@@ -46,6 +47,7 @@ function Get_ordini_studente(req, res) {
           (err, result1) => {
             if (err) {
               console.error(err);
+              res.send([]);
             } else {
               const pizze = result1.rows;
               const newOrders = ordini.map((order) => {
@@ -81,6 +83,7 @@ function Get_ordini_classe(req, res) {
       pool.query(`SELECT * FROM Studenti WHERE id_classe = ${id_classe}`,(err, result1) => {
           if (err) {
             console.error(err);
+            res.send([]);
           } else {
             const studenti_classe = result1.rows;
             const id_studenti_classe = studenti_classe.map((studente) => {
@@ -90,6 +93,7 @@ function Get_ordini_classe(req, res) {
             pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${id_studenti_classe})`,(err, result2) => {
                 if (err) {
                   console.error(err);
+                  res.send([]);
                 } else {
                   const ordini_classe = result2.rows;
                   const id_pizze = ordini_classe.map(
@@ -98,6 +102,7 @@ function Get_ordini_classe(req, res) {
                   pool.query(`SELECT * FROM Pizze WHERE id IN (${id_pizze});`,(err, result3) => {
                       if (err) {
                         console.error(err);
+                        res.send([]);
                       } else {
                         const pizze = result3.rows;
                         const newOrders = ordini_classe.map((order) => {
