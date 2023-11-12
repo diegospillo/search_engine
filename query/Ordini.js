@@ -82,7 +82,7 @@ function Get_ordini_classe(req, res) {
             if (err) {
               console.error(err);
             } else {
-              var ordini_classe = result2.rows;
+              const ordini_classe = result2.rows;
               const id_ordini = ordini_classe.map(ordine => ordine.id);
               pool.query(`SELECT Pizze.id, Pizze.nome, Pizze.prezzo FROM Pizze JOIN Ordini ON Pizze.id = Ordini.id_pizza WHERE ordini.id IN (${id_ordini})`, (err, result3) => {
                 if (err) {
@@ -94,7 +94,13 @@ function Get_ordini_classe(req, res) {
                       console.error(err);
                     } else {
                       const studente = result4.rows;
-                      const newOrder = ordini_classe.map((ordine) => {
+                      res.send({
+                        studenti_classe:studenti_classe,
+                        ordini:ordini_classe,
+                        pizze:pizze,
+                        studente:studente
+                      });
+                      /*const newOrder = ordini_classe.map((ordine) => {
                         const one_stud = studente.find((item) => item.id === order.id_studente);
                         const one_pizza = pizze.find((item) => item.id === order.id_pizza);
                         return {
@@ -105,6 +111,7 @@ function Get_ordini_classe(req, res) {
                         };
                       });
                       res.send(newOrder);
+                      */
                       pool.end();
                     }
                   });
