@@ -78,7 +78,7 @@ function Get_ordini_classe(req, res) {
           });
           const strg_stud = String(id_studenti_classe);
           console.log("Dati letti con successo1!");//VEDERE ORDINI CLASSE!!!!!!!!!!!
-          pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${strg_stud})`, (err, result2) => {
+          pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${id_studenti_classe})`, (err, result2) => {
             if (err) {
               console.error(err);
             } else {
