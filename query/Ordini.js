@@ -67,8 +67,8 @@ function Get_ordini_classe(req, res) {
       console.error(err);
     } else {
       const studente = result.rows;
-      const id_studente = studente.map(stud1 => stud1.id);
-      pool.query(`SELECT * FROM Studenti WHERE id_classe IN (${id_studente})`, (err, result1) => {
+      const id_classe = studente.map(stud => stud.id_classe);
+      pool.query(`SELECT * FROM Studenti WHERE id_classe = ${id_classe}`, (err, result1) => {
         if (err) {
           console.error(err);
         } else {
@@ -76,48 +76,16 @@ function Get_ordini_classe(req, res) {
           const id_studenti_classe = studenti_classe.map(studente => {
             return ("'"+studente.id+"'");
           });
-          const strg_stud = String(id_studenti_classe);
-          console.log("Dati letti con successo1!");//VEDERE ORDINI CLASSE!!!!!!!!!!!
+          console.log("Dati letti con successo1!");
           pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${id_studenti_classe})`, (err, result2) => {
             if (err) {
               console.error(err);
             } else {
               const ordini_classe = result2.rows;
-              const id_ordini = ordini_classe.map(ordine => ordine.id);
-              console.log("Dati letti con successo2!");
-              pool.query(`SELECT Pizze.id, Pizze.nome, Pizze.prezzo FROM Pizze JOIN Ordini ON Pizze.id = Ordini.id_pizza WHERE ordini.id IN (${id_ordini})`, (err, result3) => {
-                if (err) {
-                  console.error(err);
-                } else {
-                  const pizze = result3.rows;
-                  console.log("Dati letti con successo!3");
-                  pool.query(`SELECT Studenti.nome, Studenti.cognome FROM Studenti JOIN Ordini ON Studenti.id = Ordini.id_studente WHERE ordini.id IN (${id_ordini})`, (err, result4) => {
-                    if (err) {
-                      console.error(err);
-                    } else {
-                      const studente = result4.rows;
-                      res.send({
-                        studenti_classe:studenti_classe,
-                        ordini:ordini_classe,
-                        pizze:pizze,
-                        studente:studente
-                      });
-                      /*const newOrder = ordini_classe.map((ordine) => {
-                        const one_stud = studente.find((item) => item.id === order.id_studente);
-                        const one_pizza = pizze.find((item) => item.id === order.id_pizza);
-                        return {
-                          id: ordine.id,
-                          nome: one_stud.nome + " " + one_stud.cognome,
-                          pizza: one_pizza.nome,
-                          prezzo: one_pizza.prezzo
-                        };
-                      });
-                      res.send(newOrder);
-                      */
-                      pool.end();
-                    }
-                  });
-                }
+              res.send({
+                studente:studente,
+                studenti_classe:studenti_classe,
+                ordini_classe:ordini_classe
               });
             }
           });
