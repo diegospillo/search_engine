@@ -13,34 +13,6 @@ app.use(cors({
     origin: 'http://localhost:5173'
 }));
 
-
-
-
-//INVIO ORDINE
-app.get("/send_ordine", (req,res) => {
-    const id = req.query.id;
-    var cont = 0;
-    var ordini = [];
-    while(true){
-        var ordine = req.query["ordine"+cont];
-        if(ordine){
-            ordini.push(ordine);
-            cont++;
-        }
-        else break;
-    }
-    console.log(ordini);
-    res.redirect(`http://localhost:5173/ordine?id=${id}&stato=true`)
-})
-
-
-//ELIMINA ORDINE STUDENTE
-app.get("/elimina_ordine", (req,res) => {
-   const id = req.query.id_client;
-   console.log(req.query);
-   res.redirect(`http://localhost:5173/ordine?id=${id}&stato=true`)
-})
-
 ////////////////////////////////////////////////// QUERY DI CREAZIONE
 
 app.get("/get_Classi", (req,res)=>Classi.get(req,res))//USE
@@ -65,6 +37,7 @@ app.get("/get_Ordini_Studente", (req,res)=>Ordini.get_ordini_studente(req,res))/
 app.get("/get_Ordini_Classe", (req,res)=>Ordini.get_ordini_classe(req,res))//USE
 app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))//USE
 app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
+app.get("/drop_Ordine", (req,res)=>Ordini.alter(req,res))//USE
 
 
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})
