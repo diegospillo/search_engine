@@ -68,7 +68,7 @@ function Get_ordini_classe(req, res) {
     } else {
       const studente = result.rows;
       const id_studente = studente.map(stud1 => stud1.id);
-      pool.query(`SELECT * FROM Studenti WHERE id_classe IN (${id_studente});`, (err, result1) => {
+      pool.query(`SELECT * FROM Studenti WHERE id_classe IN (${id_studente})`, (err, result1) => {
         if (err) {
           console.error(err);
         } else {
@@ -77,18 +77,20 @@ function Get_ordini_classe(req, res) {
             return ("'"+studente.id+"'");
           });
           const strg_stud = String(id_studenti_classe);
-          console.log("Dati letti con successo!");//VEDERE ORDINI CLASSE!!!!!!!!!!!
+          console.log("Dati letti con successo1!");//VEDERE ORDINI CLASSE!!!!!!!!!!!
           pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${strg_stud})`, (err, result2) => {
             if (err) {
               console.error(err);
             } else {
               const ordini_classe = result2.rows;
               const id_ordini = ordini_classe.map(ordine => ordine.id);
+              console.log("Dati letti con successo2!");
               pool.query(`SELECT Pizze.id, Pizze.nome, Pizze.prezzo FROM Pizze JOIN Ordini ON Pizze.id = Ordini.id_pizza WHERE ordini.id IN (${id_ordini})`, (err, result3) => {
                 if (err) {
                   console.error(err);
                 } else {
                   const pizze = result3.rows;
+                  console.log("Dati letti con successo!3");
                   pool.query(`SELECT Studenti.nome, Studenti.cognome FROM Studenti JOIN Ordini ON Studenti.id = Ordini.id_studente WHERE ordini.id IN (${id_ordini})`, (err, result4) => {
                     if (err) {
                       console.error(err);
