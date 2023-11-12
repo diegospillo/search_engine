@@ -109,7 +109,7 @@ function Get_ordini_classe(req, res) {
                             (item) => item.id === order.id_pizza
                           );
                           return {
-                            id: ordine.id,
+                            id: order.id,
                             nome: one_stud.nome + " " + one_stud.cognome,
                             pizza: one_pizza.nome,
                             prezzo: one_pizza.prezzo,
