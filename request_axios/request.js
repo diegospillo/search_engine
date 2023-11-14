@@ -19,7 +19,7 @@ async function getStudenti() {
 
 async function getOrdini() {
     const response = await axios.get(url+'/get_Ordini');
-    return response-data;
+    return response.data;
 }
 
 module.exports = {
