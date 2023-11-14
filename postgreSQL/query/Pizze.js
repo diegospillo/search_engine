@@ -64,7 +64,7 @@ function Alter(req, res){
 function Drop(req, res) {
   const pool = connection();
   const id = req.query.id;
-  pool.query(`DELETE FROM Studenti WHERE id = ${id};`, (err, result) => {
+  pool.query(`DELETE FROM Pizze WHERE id = ${id};`, (err, result) => {
     if (err) {
       console.error(err);
       res.send(false);
