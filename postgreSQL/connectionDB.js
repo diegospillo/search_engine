@@ -12,12 +12,3 @@ function connection() {
   }
 
 module.exports = connection;
-
-/*pool.query("CREATE TABLE Classi (id SERIAL PRIMARY KEY, anno VARCHAR(1) NOT NULL, sezione VARCHAR(2) NOT NULL)", (err, result) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log("Tabella creata con successo!");
-  }
-});
-*/
