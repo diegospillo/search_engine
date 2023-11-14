@@ -4,22 +4,22 @@ const url = "https://pizzappbackend.onrender.com";
 
 async function getClassi() {
     const response = await axios.get(url+'/get_Classi');
-    return response;
+    return response.data;
 }
 
 async function getPizze() {
     const response = await axios.get(url+'/get_Pizze');
-    return response;
+    return response.data;
 }
 
 async function getStudenti() {
     const response = await axios.get(url+'/get_Studenti');
-    return response;
+    return response.data;
 }
 
 async function getOrdini() {
     const response = await axios.get(url+'/get_Ordini');
-    return response;
+    return response-data;
 }
 
 module.exports = {
