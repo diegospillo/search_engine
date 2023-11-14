@@ -32,7 +32,7 @@ function Insert(req, res) {
   const nome = req.query.nome;
   const prezzo = req.query.prezzo;
   pool.query(
-    `INSERT INTO Pizze (Nome, prezzo) VALUES ('${nome}', ${prezzo};`,
+    `INSERT INTO Pizze (Nome, prezzo) VALUES ('${nome}', ${prezzo});`,
     (err, result) => {
       if (err) {
         console.error(err);

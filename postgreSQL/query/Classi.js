@@ -20,7 +20,7 @@ function Insert(req, res) {
   const anno = req.query.anno;
   const sezione = req.query.sezione;
   pool.query(
-    `INSERT INTO Classi (anno, sezione) VALUES ('${anno}', '${sezione}')`,
+    `INSERT INTO Classi (anno, sezione) VALUES ('${anno}', '${sezione}');`,
     (err, result) => {
       if (err) {
         console.error(err);
