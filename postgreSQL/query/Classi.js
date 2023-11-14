@@ -17,30 +17,33 @@ function Get(req, res) {
 
 function Insert(req, res) {
   const pool = connection();
-
+  const anno = req.query.anno;
+  const sezione = req.query.sezione;
   pool.query(
-    "INSERT INTO Classi (anno, sezione) VALUES ('1', 'A'), ('1', 'B'), ('1', 'C'), ('2', 'A'), ('2', 'B'), ('2', 'C'), ('3', 'A'), ('3', 'B'), ('3', 'C'), ('3', 'DE'),('4', 'A'), ('4', 'B'), ('4', 'C'), ('4', 'DE'), ('5', 'A'), ('5', 'B'), ('5', 'C'), ('5', 'DE');",
+    `INSERT INTO Classi (anno, sezione) VALUES ('${anno}', '${sezione}')`,
     (err, result) => {
       if (err) {
         console.error(err);
+        res.send(false);
       } else {
-        console.log("Dati inseriti con successo!");
-        pool.end();
+        res.send(true);
       }
+      pool.end();
     }
   );
 }
 
 function Drop(req, res) {
   const pool = connection();
-
-  pool.query("DELETE FROM Classi WHERE id > 18;", (err, result) => {
+  const id=req.query.id;
+  pool.query(`DELETE FROM Classi WHERE id = ${id};`, (err, result) => {
     if (err) {
       console.error(err);
+      res.send(false);
     } else {
-      res.send("Righe eliminate con successo!");
-      pool.end();
+      res.send(true);
     }
+    pool.end();
   });
 }
 

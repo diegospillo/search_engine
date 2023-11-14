@@ -31,7 +31,23 @@
     <% for(let i=0;i<data.length;i++){%>
         <tr>
             <% for(let x=0;x<paramaters.length;x++){%>
-            <td><%=data[i][paramaters[x]]%></td>
+            <% switch (paramaters[x]) {
+              case 'id_classe':
+                %><td><a href="/Classi?id=<%=data[i][paramaters[x]]%>"><%=data[i][paramaters[x]]%></a></td><%
+                break;
+              case 'id_pizza':
+               %><td><a href="/Pizze?id=<%=data[i][paramaters[x]]%>"><%=data[i][paramaters[x]]%></a></td><%
+                break;
+              case 'id_studente':
+               %><td><a href="/Studenti?id=<%=data[i][paramaters[x]]%>"><%=data[i][paramaters[x]]%></a></td><%
+                break;
+              case 'id_ordine':
+               %><td><a href="/Ordini?id=<%=data[i][paramaters[x]]%>"><%=data[i][paramaters[x]]%></a></td><%
+                break;
+              default:
+                %><td><%=data[i][paramaters[x]]%></td><%
+                break;
+            } %>
             <% } %>
         </tr>
     <% } %>

@@ -29,16 +29,18 @@ function Get(req, res) {
 
 function Insert(req, res) {
   const pool = connection();
-
+  const nome = req.query.nome;
+  const prezzo = req.query.prezzo;
   pool.query(
-    "INSERT INTO Pizze (Nome, prezzo) VALUES ('Margherita', 1), ('Boscaiola', 1.5);",
+    `INSERT INTO Pizze (Nome, prezzo) VALUES ('${nome}', ${prezzo};`,
     (err, result) => {
       if (err) {
         console.error(err);
+        res.send(false);
       } else {
-        res.send("Dati inseriti con successo!");
-        pool.end();
+        res.send(true);
       }
+      pool.end();
     }
   );
 }
@@ -61,14 +63,15 @@ function Alter(req, res){
 
 function Drop(req, res) {
   const pool = connection();
-
-  pool.query("DELETE FROM Studenti WHERE id > 18;", (err, result) => {
+  const id = req.query.id;
+  pool.query(`DELETE FROM Studenti WHERE id = ${id};`, (err, result) => {
     if (err) {
       console.error(err);
+      res.send(false);
     } else {
-      res.send("Righe eliminate con successo!");
-      pool.end();
+      res.send(true);
     }
+    pool.end();
   });
 }
 
