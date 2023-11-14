@@ -81,6 +81,7 @@ app.get("/get_Studente", (req,res)=>Studenti.get_studente(req,res))//USE
 app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))//USE
 app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))
 app.get("/alter_Pizze", (req,res)=>Pizze.alter(req,res))
+app.get("/drop_Pizze", (req,res)=>Pizze.drop(req,res))
 
 app.get("/get_Ordini", (req,res)=>Ordini.get_all(req,res))
 app.get("/get_Ordini_Studente", (req,res)=>Ordini.get_ordini_studente(req,res))//USE

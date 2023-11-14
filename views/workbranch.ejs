@@ -37,7 +37,7 @@
     <% for(let i=0;i<data.length;i++){%>
         <tr>
             <% for(let x=0;x<paramaters.length;x++){%>
-            <% switch (paramaters[x]) {
+            <% switch (paramaters[x]) { 
               case 'id_classe':
                 %><td><a href="/Classi?id=<%=data[i][paramaters[x]]%>"><%=data[i][paramaters[x]]%></a></td><%
                 break;
@@ -55,6 +55,7 @@
                 break;
             } %>
             <% } %>
+            <td><button><a href="https://pizzappbackend.onrender.com/drop_<%=tabella%>?id=<%=data[i]['id']%>">Elimina</a></button></td>
         </tr>
     <% } %>
         </tbody>
