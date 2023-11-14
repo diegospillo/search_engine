@@ -43,23 +43,23 @@ app.get("/", (req,res)=>{
 })
 app.get("/Classi", async(req,res)=>{
     const data_res = await request.get_classi();
-    const nomiParametri = Object.getOwnPropertyNames(data_res[0]);
-    res.render("workbranch", {tabella:"Classi",data: data_res, paramaters: nomiParametri})
+    const nomiParametri = Object.getOwnPropertyNames(await data_res[0]);
+    res.render("workbranch", {tabella:"Classi",data: await data_res, paramaters: nomiParametri})
 })
 app.get("/Pizze", async(req,res)=>{
     const data_res = await request.get_pizze();
-    const nomiParametri = Object.getOwnPropertyNames(data_res[0]);
-    res.render("workbranch", {tabella:"Pizze",data: data_res, paramaters: nomiParametri})
+    const nomiParametri = Object.getOwnPropertyNames(await data_res[0]);
+    res.render("workbranch", {tabella:"Pizze",data: await data_res, paramaters: nomiParametri})
 })
 app.get("/Studenti", async(req,res)=>{
     const data_res = await request.get_studenti();
-    const nomiParametri = Object.getOwnPropertyNames(data_res[0]);
-    res.render("workbranch", {tabella:"Studenti",data: data_res, paramaters: nomiParametri})
+    const nomiParametri = Object.getOwnPropertyNames(await data_res[0]);
+    res.render("workbranch", {tabella:"Studenti",data: await data_res, paramaters: nomiParametri})
 })
 app.get("/Ordini", async(req,res)=>{
     const data_res = await request.get_ordini();
-    const nomiParametri = Object.getOwnPropertyNames(data_res[0]);
-    res.render("workbranch", {tabella:"Ordini",data: data_res, paramaters: nomiParametri})
+    const nomiParametri = Object.getOwnPropertyNames(await data_res[0]);
+    res.render("workbranch", {tabella:"Ordini",data: await data_res, paramaters: nomiParametri})
 })
 
 
