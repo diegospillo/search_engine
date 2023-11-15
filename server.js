@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require('cors');
 const bodyParser = require('body-parser')
-const cron = require("node-cron");
 
 const PORT = process.env.PORT || 5000;
 
@@ -91,11 +90,3 @@ app.get("/truncate_Ordine", (req,res)=>Ordini.truncate(req,res))
 
 
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})
-
-
-const job = cron.schedule("30 18 * * * CET", () => {
-    Ordini.truncate(0,0);
-    console.log("Esecuzione dell'attività alle 8:00 di mattina");
-  });
-  
-job.start();
