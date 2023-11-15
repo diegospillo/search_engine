@@ -107,8 +107,8 @@ function Check_id(req, res){
     } else {
         console.log("ID registrato");
         res.json({ stato: true });
-        pool.end();
-    }
+      }
+      pool.end();
   });
 }
 
