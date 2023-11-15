@@ -2,6 +2,11 @@ const axios = require('axios');
 
 const url = "https://pizzappbackend.onrender.com";
 
+async function truncate_Ordini() {
+    const response = await axios.get(url+'/truncate_Ordini');
+    return response.data;
+}
+
 async function getClassi(id) {
     const response = await axios.get(url+'/get_Classi');
     const data_res = filter(response,id);
@@ -43,5 +48,6 @@ module.exports = {
     get_classi: getClassi,
     get_pizze: getPizze,
     get_studenti: getStudenti,
-    get_ordini: getOrdini
+    get_ordini: getOrdini,
+    truncate_ordini: truncate_Ordini
 }

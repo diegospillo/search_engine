@@ -197,9 +197,9 @@ function Truncate(req, res) {
   pool.query("TRUNCATE Ordini", (err, result) => {
     if (err) {
       console.error(err);
+      res.send(false);
     } else {
-      if(res!=0)res.send("Dati tabella eliminata con successo!");
-      else console.log("Tabella ordini svuotata con successo!");
+      res.send(true);
     }
     pool.end();
   });
