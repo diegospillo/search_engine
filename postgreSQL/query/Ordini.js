@@ -34,7 +34,7 @@ function Get_ordini_studente(req, res) {
   const pool = connection();
   const id = req.query.id;
   pool.query(
-    `SELECT * FROM Ordini WHERE (id_studente = '${id}') AND (data BETWEEN current_timestamp() AND current_timestamp() + interval '1 day');`,
+    `SELECT * FROM Ordini WHERE id_studente = '${id}';`,
     (err, result) => {
       if (err) {
         console.error(err);
