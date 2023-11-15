@@ -105,16 +105,9 @@ function Check_id(req, res){
       console.error(err);
       res.json({ stato: false })
     } else {
-      if(result.rows.length>0){
         console.log("ID registrato");
         res.json({ stato: true });
         pool.end();
-      }
-      else{
-        console.log("ID non registrato");
-        res.json({ stato: false });
-        pool.end();
-      }
     }
   });
 }
