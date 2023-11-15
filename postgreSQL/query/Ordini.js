@@ -63,13 +63,12 @@ function Get_ordini_studente(req, res) {
               });
               res.send(newOrders);
 
-              pool.end();
             }
           }
-        );
-      }
-    }
-  );
+          );
+        }
+        pool.end();
+    });
 }
 
 function Get_ordini_classe(req, res) {
@@ -78,6 +77,7 @@ function Get_ordini_classe(req, res) {
   pool.query(`SELECT * FROM Studenti WHERE id = '${id}';`, (err, result) => {
     if (err) {
       console.error(err);
+      res.send([]);
     } else {
       const studente = result.rows;
       const id_classe = studente.map((stud) => stud.id_classe);
@@ -122,7 +122,6 @@ function Get_ordini_classe(req, res) {
                         });
                         res.send(newOrders);
 
-                        pool.end();
                       }
                     }
                   );
@@ -131,8 +130,9 @@ function Get_ordini_classe(req, res) {
             );
           }
         }
-      );
-    }
+        );
+      }
+      pool.end();
   });
 }
 
