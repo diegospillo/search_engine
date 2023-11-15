@@ -124,6 +124,7 @@ function Get_Studente(req, res) {
       pool.query(`SELECT * FROM Classi WHERE id = ${studente[0].id_classe};`, (err, result1) => {
         if (err) {
           console.error(err);
+          res.send(false);//MODIFICA
         } else {
           const classe = result1.rows;
           const new_studente = studente.map((studente1, index) => {
