@@ -121,6 +121,7 @@ function Get_Studente(req, res) {
       res.send(false);//MODIFICA
     } else {
       const studente = result.rows;
+      if(studente.length>0){
       pool.query(`SELECT * FROM Classi WHERE id = ${studente[0].id_classe};`, (err, result1) => {
         if (err) {
           console.error(err);
@@ -137,9 +138,12 @@ function Get_Studente(req, res) {
             };
           });
           res.send(new_studente);
-          pool.end();
         }
       });
+    }else{
+      res.send(false);
+    }
+    pool.end();
     }
   });
 }
