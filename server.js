@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const bodyParser = require('body-parser')
+const cron = require("node-cron");
 
 const PORT = process.env.PORT || 5000;
 
@@ -18,9 +19,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(cors({origin: 'http://localhost:5173'}));
 app.set('views', './views')
 app.set('view engine', 'ejs')
-
-
-
 
 
 app.get("/", (req,res)=>{
@@ -89,6 +87,15 @@ app.get("/get_Ordini_Classe", (req,res)=>Ordini.get_ordini_classe(req,res))//USE
 app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))//USE
 app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
 app.get("/drop_Ordine", (req,res)=>Ordini.drop(req,res))//USE
+app.get("/truncate_Ordine", (req,res)=>Ordini.truncate(req,res))
 
 
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})
+
+
+const job = cron.schedule("20 18 * * *", () => {
+    Ordini.truncate(0,0);
+    console.log("Esecuzione dell'attività alle 8:00 di mattina");
+  });
+  
+job.start();

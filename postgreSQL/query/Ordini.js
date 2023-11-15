@@ -191,6 +191,20 @@ function Drop(req, res) {
   });
 }
 
+function Truncate(req, res) {
+  const pool = connection();
+
+  pool.query("TRUNCATE Ordini", (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      if(res!=0)res.send("Dati tabella eliminata con successo!");
+      else console.log("Tabella ordini svuotata con successo!");
+    }
+    pool.end();
+  });
+}
+
 module.exports = {
   create: Create,
   alter: Alter,
@@ -199,4 +213,5 @@ module.exports = {
   get_ordini_classe: Get_ordini_classe,
   insert: Insert,
   drop: Drop,
+  truncate:Truncate
 };
