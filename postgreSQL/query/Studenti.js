@@ -20,11 +20,12 @@ function Get(req, res) {
   pool.query("SELECT * FROM Studenti;", (err, result) => {
     if (err) {
       console.error(err);
+      res.send([]);
     } else {
       console.log("Dati letti con successo!");
       res.send(result.rows);
-      pool.end();
     }
+    pool.end();
   });
 }
 

@@ -4,7 +4,7 @@ const url = "https://pizzappbackend.onrender.com";
 
 async function truncate_Ordini() {
     const response = await axios.get(url+'/truncate_Ordini');
-    return response.data;
+    return await response.data;
 }
 
 async function getClassi(id) {
@@ -32,7 +32,8 @@ async function getOrdini(id) {
 }
 
 function filter(response,id){
-    var data_res = response.data;
+    let data_res = response.data;
+    if(data_res.length>0){
     if(id){
         const data_filter = data_res.filter(res => res.id==id);
         data_res = data_filter;
@@ -42,6 +43,8 @@ function filter(response,id){
         data: data_res,
         parametri: nomiParametri
     };
+}
+return [];
 }
 
 module.exports = {
