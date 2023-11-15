@@ -93,7 +93,7 @@ app.get("/truncate_Ordine", (req,res)=>Ordini.truncate(req,res))
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})
 
 
-const job = cron.schedule("20 18 * * *", () => {
+const job = cron.schedule("30 18 * * * CET", () => {
     Ordini.truncate(0,0);
     console.log("Esecuzione dell'attività alle 8:00 di mattina");
   });
