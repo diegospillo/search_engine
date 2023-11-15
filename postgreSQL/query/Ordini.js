@@ -62,7 +62,6 @@ function Get_ordini_studente(req, res) {
                 };
               });
               res.send(newOrders);
-
             }
           }
           );
@@ -121,7 +120,6 @@ function Get_ordini_classe(req, res) {
                           };
                         });
                         res.send(newOrders);
-
                       }
                     }
                   );
