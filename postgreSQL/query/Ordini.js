@@ -22,11 +22,12 @@ function Get_All(req, res) {
   pool.query("SELECT * FROM Ordini;", (err, result) => {
     if (err) {
       console.error(err);
+      res.send([]);
     } else {
       console.log("Dati letti con successo!");
       res.send(result.rows);
-      pool.end();
     }
+    pool.end();
   });
 }
 

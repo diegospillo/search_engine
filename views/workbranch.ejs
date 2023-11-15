@@ -18,13 +18,13 @@
       </div>
     </center>
     <h1><%=tabella%></h1>
+    <% if(data){ %>
     <form action="https://pizzappbackend.onrender.com/insert_<%=tabella%>" method="get">
       <% for(let i=1;i<paramaters.length;i++){%>
         <input type="text" name="<%= paramaters[i] %>" placeholder="inserisci <%=paramaters[i]%>">
       <% } %>
       <input type="submit" value="Inserisci">
     </form>
-  <% if(data.length>0){ %>
     <table class="table">
         <thead>
           <tr>
@@ -61,7 +61,7 @@
         </tbody>
     </table>
   <% }else{ %>
-    <h1 style="position: absolute; color: white;top: 300px;left: 30%;">Errore</h1>
+    <center><h1 style="font-size: 50px;">Tabella vuota</h1></center>
   <% } %>
 </body>
 
