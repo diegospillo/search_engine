@@ -90,7 +90,7 @@ function Get_ordini_classe(req, res) {
               return "'" + studente.id + "'";
             });
             console.log("Dati letti con successo1!");
-            pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${id_studenti_classe}) AND data BETWEEN CURRENT_TIMESTAMP AND CURRENT_TIMESTAMP + INTERVAL '1 day';`,(err, result2) => {
+            pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${id_studenti_classe})`,(err, result2) => {
                 if (err) {
                   console.error(err);
                   res.send([]);
