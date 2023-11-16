@@ -1,5 +1,7 @@
 const connection = require("../connectionDB");
 
+const url = "https://pizzapp-28o9.onrender.com";
+
 function Create(req, res) {
   const pool = connection();
 
@@ -157,7 +159,7 @@ function Insert(req, res) {
       }
     );
   });
-  res.redirect(`http://localhost:5173/ordine?id=${id_studente}&stato=true`);
+  res.redirect(`${url}/ordine?id=${id_studente}&stato=true`);
   pool.end();
 }
 
@@ -185,7 +187,7 @@ function Drop(req, res) {
     if (err) {
       console.error(err);
     } else {
-      res.redirect(`http://localhost:5173/ordine?id=${id_studente}&stato=true`);
+      res.redirect(`${url}/ordine?id=${id_studente}&stato=true`);
       pool.end();
     }
   });
