@@ -43,7 +43,7 @@ var cognome = escapeString(client.cognome);
 console.log("Nome:"+nome);
 console.log("Cognome:"+cognome);
   pool.query(
-    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, "${nome}", "${cognome}", "${client.email}", ${client.classe});`,
+    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${nome}', '${cognome}', '${client.email}', ${client.classe});`,
     (err, result) => {
       if (err) {
         console.error(err);
