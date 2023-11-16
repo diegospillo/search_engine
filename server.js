@@ -17,7 +17,7 @@ const app = express();
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors({origin: 'http://localhost:5173,https://pizzapp-28o9.onrender.com'}));
+app.use(cors({origin: ['http://localhost:5173','https://pizzapp-28o9.onrender.com']}));
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
