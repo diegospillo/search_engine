@@ -40,7 +40,7 @@ async function Insert(req, res) {
 }
 
   pool.query(
-    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${client.nome}', '${client.cognome}', '${client.email}', ${client.classe});`,
+    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, "${client.nome}", "${client.cognome}", "${client.email}", ${client.classe});`,
     (err, result) => {
       if (err) {
         console.error(err);
