@@ -38,9 +38,10 @@ async function Insert(req, res) {
     email: req.query.email,
     classe: req.query.classe
 }
-
+const nome_client = stringa.replace(/'/g, '');
+const cognome_client = stringa.replace(/'/g, '');
   pool.query(
-    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${client.nome}', '${client.cognome}', '${client.email}', ${client.classe});`,
+    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${nome_client}', '${cognome_client}', '${client.email}', ${client.classe});`,
     (err, result) => {
       if (err) {
         console.error(err);
