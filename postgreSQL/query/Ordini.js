@@ -4,7 +4,7 @@ function Create(req, res) {
   const pool = connection();
 
   pool.query(
-    "CREATE TABLE Ordini (id SERIAL PRIMARY KEY, id_Studente VARCHAR(100) NOT NULL, id_Pizza INTEGER NOT NULL, data DATE DEFAULT current_date())",
+    "CREATE TABLE Ordini (id SERIAL PRIMARY KEY, id_Studente VARCHAR(100) NOT NULL, id_Pizza INTEGER NOT NULL, data DATE DEFAULT CURRENT_DATE)",
     (err, result) => {
       if (err) {
         console.error(err);
