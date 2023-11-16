@@ -35,7 +35,7 @@ function Get_ordini_studente(req, res) {
   const pool = connection();
   const id = req.query.id;
   pool.query(
-    `SELECT * FROM Ordini WHERE id_studente = '${id}';`,
+    `SELECT * FROM Ordini WHERE (id_studente = '${id}') AND (data BETWEEN CURRENT_TIMESTAMP AND date_add(CURRENT_TIMESTAMP, INTERVAL 1 DAY));`,//MODIFY
     (err, result) => {
       if (err) {
         console.error(err);
