@@ -17,7 +17,7 @@ const app = express();
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors({origin: 'http://localhost:5173'}));
+app.use(cors({origin: 'http://localhost:5173'||'https://pizzapp-28o9.onrender.com'}));
 app.set('views', './views')
 app.set('view engine', 'ejs')
 
@@ -90,7 +90,7 @@ app.get("/insert_Ordini", (req,res)=>Ordini.insert(req,res))//USE
 app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
 app.get("/drop_Ordine", (req,res)=>Ordini.drop(req,res))//USE
 app.get("/truncate_Ordini", (req,res)=>Ordini.truncate(req,res))
-app.get("/drop_table_Ordini", (req,res)=>Ordini.drop_table(req,res))//USE
+app.get("/drop_table_Ordini", (req,res)=>Ordini.drop_table(req,res))
 
 
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})
