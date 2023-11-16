@@ -4,7 +4,7 @@ function Create(req, res) {
   const pool = connection();
 
   pool.query(
-    "CREATE TABLE Ordini (id SERIAL PRIMARY KEY, id_Studente VARCHAR(100) NOT NULL, id_Pizza INTEGER NOT NULL, data TIMESTAMP DEFAULT CURRENT_TIMESTAMP)",
+    "CREATE TABLE Ordini (id SERIAL PRIMARY KEY, id_Studente VARCHAR(100) NOT NULL, id_Pizza INTEGER NOT NULL, data DATE DEFAULT current_date())",
     (err, result) => {
       if (err) {
         console.error(err);
@@ -206,6 +206,20 @@ function Truncate(req, res) {
   });
 }
 
+
+function Drop_table(req, res) {
+  const pool = connection();
+
+  pool.query("DROP TABLE Ordini", (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send("Tabella eliminata con successo!");
+      pool.end();
+    }
+  });
+}
+
 module.exports = {
   create: Create,
   alter: Alter,
@@ -214,5 +228,6 @@ module.exports = {
   get_ordini_classe: Get_ordini_classe,
   insert: Insert,
   drop: Drop,
+  drop_table: Drop_table,
   truncate:Truncate
 };
