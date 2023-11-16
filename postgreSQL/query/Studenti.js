@@ -59,7 +59,7 @@ console.log("Cognome:"+cognome);
 }
 
 function escapeString(string) {
-  return string.replace(/'/g, "\\'");
+  return string.replace(/'/g, '');
 }
 
 function Drop(req, res) {
