@@ -38,9 +38,10 @@ async function Insert(req, res) {
     email: req.query.email,
     classe: req.query.classe
 }
-
+var nome = escapeString(client.nome);
+var cognome = escapeString(client.cognome);
   pool.query(
-    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, "${client.nome}", "${client.cognome}", "${client.email}", ${client.classe});`,
+    `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES (${client.id}, '${nome}', '${cognome}', '${client.email}', ${client.classe});`,
     (err, result) => {
       if (err) {
         console.error(err);
@@ -53,6 +54,10 @@ async function Insert(req, res) {
       }
     }
   );
+}
+
+function escapeString(string) {
+  return string.replace(/([\'\"]|\n|\r|\\)/g, "\\$1");
 }
 
 function Drop(req, res) {
