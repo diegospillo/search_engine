@@ -103,12 +103,17 @@ function Check_id(req, res){
   pool.query(`SELECT * FROM Studenti WHERE id = '${id}';`, (err, result) => {
     if (err) {
       console.error(err);
-      res.json({ stato: false })
     } else {
+      if(result.rows.length>0){
         console.log("ID registrato");
         res.json({ stato: true });
       }
+      else{
+        console.log("ID non registrato");
+        res.json({ stato: false })
+      }
       pool.end();
+      }
   });
 }
 
