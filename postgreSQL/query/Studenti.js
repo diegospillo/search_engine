@@ -41,7 +41,7 @@ async function Insert(req, res) {
 //PEPPE DEVE CAMBIA' COGNOME
 const nome_client = client.nome.replace("'", "");
 const cognome_client = client.cognome.replace("'", "");
-const email_client = client.email;
+const email_client = client.email.replace("'", "");
 console.log("Nome:"+nome_client);
 console.log("Cognome:"+cognome_client);
 console.log("Email:"+email_client);
