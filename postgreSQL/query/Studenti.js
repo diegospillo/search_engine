@@ -39,8 +39,8 @@ async function Insert(req, res) {
     classe: req.query.classe
 }
 //PEPPE DEVE CAMBIA' COGNOME
-const nome_client = client.nome.replace(/'/g, '\'');
-const cognome_client = client.cognome.replace(/'/g, '\'');
+const nome_client = client.nome.replace("'", "\'");
+const cognome_client = client.cognome.replace("'", "\'");
 const query = `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${client.email}', ${client.classe});`;
 console.log(query); 
 pool.query(query,(err, result) => {
