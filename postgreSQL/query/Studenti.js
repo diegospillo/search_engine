@@ -45,7 +45,7 @@ const email_client = client.email.replace("'", "\\'");
 console.log("Nome:"+nome_client);
 console.log("Cognome:"+cognome_client);
 console.log("Email:"+email_client);
-const query = `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}', ${client.classe});`;
+const query = `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ("${client.id}", "${nome_client}", "${cognome_client}", "${email_client}", ${client.classe});`;
 console.log(query); 
 pool.query(query,(err, result) => {
       if (err) {
