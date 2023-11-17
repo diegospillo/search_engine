@@ -39,13 +39,10 @@ async function Insert(req, res) {
     classe: req.query.classe
 }
 //PEPPE DEVE CAMBIA' COGNOME
-const nome_client = client.nome.replace("'", "\'");
-//const cognome_client = client.cognome.replace("'", "\'");
-var str = JSON.stringify(String(client.cognome));
-const cognome_client = str.substring(1, str.length-1);
-//const email_client = client.email.replace("'", "\'");
-str = JSON.stringify(String(client.email));
-const email_client = str.substring(1, str.length-1);
+const nome_client = client.nome.replace("'", "");
+const cognome_client = client.cognome.replace("'", "");
+const email_client = client.email.replace("'", "");
+console.log("Nome:"+nome_client);
 console.log("Cognome:"+cognome_client);
 console.log("Email:"+email_client);
 const query = `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}', ${client.classe});`;
