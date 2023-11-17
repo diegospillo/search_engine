@@ -40,8 +40,12 @@ async function Insert(req, res) {
 }
 //PEPPE DEVE CAMBIA' COGNOME
 const nome_client = client.nome.replace("'", "\'");
-const cognome_client = client.cognome.replace("'", "\'");
-const email_client = client.email.replace("'", "\'");
+//const cognome_client = client.cognome.replace("'", "\'");
+var str = JSON.stringify(String(client.cognome));
+const cognome_client = str.substring(1, str.length-1);
+//const email_client = client.email.replace("'", "\'");
+str = JSON.stringify(String(client.email));
+const email_client = str.substring(1, str.length-1);
 const query = `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}', ${client.classe});`;
 console.log(query); 
 pool.query(query,(err, result) => {
