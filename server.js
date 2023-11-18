@@ -91,6 +91,7 @@ app.get("/alter_Ordini", (req,res)=>Ordini.alter(req,res))
 app.get("/drop_Ordine", (req,res)=>Ordini.drop(req,res))//USE
 app.get("/truncate_Ordini", (req,res)=>Ordini.truncate(req,res))
 app.get("/drop_table_Ordini", (req,res)=>Ordini.drop_table(req,res))
+app.get("/get_Ordini_All_Classi", (req,res)=>Ordini.get_ordini_all_classi(req,res))//USE
 
 
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})

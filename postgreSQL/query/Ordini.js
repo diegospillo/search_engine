@@ -37,7 +37,7 @@ function Get_ordini_studente(req, res) {
   const pool = connection();
   const id = req.query.id;
   pool.query(
-    `SELECT * FROM Ordini WHERE id_studente = '${id}' AND data = CURRENT_DATE;`,//MODIFY
+    `SELECT * FROM Ordini WHERE id_studente = '${id}' AND data = CURRENT_DATE;`, //MODIFY
     (err, result) => {
       if (err) {
         console.error(err);
@@ -83,7 +83,9 @@ function Get_ordini_classe(req, res) {
     } else {
       const studente = result.rows;
       const id_classe = studente.map((stud) => stud.id_classe);
-      pool.query(`SELECT * FROM Studenti WHERE id_classe = ${id_classe}`,(err, result1) => {
+      pool.query(
+        `SELECT * FROM Studenti WHERE id_classe = ${id_classe}`,
+        (err, result1) => {
           if (err) {
             console.error(err);
             res.send([]);
@@ -93,7 +95,9 @@ function Get_ordini_classe(req, res) {
               return "'" + studente.id + "'";
             });
             console.log("Dati letti con successo1!");
-            pool.query(`SELECT * FROM Ordini WHERE id_studente IN (${id_studenti_classe}) AND data = CURRENT_DATE;`,(err, result2) => {
+            pool.query(
+              `SELECT * FROM Ordini WHERE id_studente IN (${id_studenti_classe}) AND data = CURRENT_DATE;`,
+              (err, result2) => {
                 if (err) {
                   console.error(err);
                   res.send([]);
@@ -102,7 +106,9 @@ function Get_ordini_classe(req, res) {
                   const id_pizze = ordini_classe.map(
                     (ordine) => ordine.id_pizza
                   );
-                  pool.query(`SELECT * FROM Pizze WHERE id IN (${id_pizze});`,(err, result3) => {
+                  pool.query(
+                    `SELECT * FROM Pizze WHERE id IN (${id_pizze});`,
+                    (err, result3) => {
                       if (err) {
                         console.error(err);
                         res.send([]);
@@ -136,6 +142,25 @@ function Get_ordini_classe(req, res) {
     }
   });
 }
+
+//Amministratore
+
+function Get_ordini_classi(req, res) {
+  const pool = connection();
+  const id = req.query.id;
+  pool.query("SELECT Ordini.id, Studenti.nome, Studenti.cognome FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id", (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send([]);
+    } else {
+      const Ordini=result.rows;
+      res.send(Ordini);
+    }
+    pool.end();
+  });
+}
+
+///
 
 function Insert(req, res) {
   const pool = connection();
@@ -208,7 +233,6 @@ function Truncate(req, res) {
   });
 }
 
-
 function Drop_table(req, res) {
   const pool = connection();
 
@@ -228,8 +252,9 @@ module.exports = {
   get_all: Get_All,
   get_ordini_studente: Get_ordini_studente,
   get_ordini_classe: Get_ordini_classe,
+  get_ordini_all_classi:Get_ordini_classi,
   insert: Insert,
   drop: Drop,
   drop_table: Drop_table,
-  truncate:Truncate
+  truncate: Truncate,
 };
