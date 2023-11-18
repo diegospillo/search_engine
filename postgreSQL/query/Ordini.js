@@ -147,14 +147,22 @@ function Get_ordini_classe(req, res) {
 
 function Get_ordini_classi(req, res) {
   const pool = connection();
-  const id = req.query.id;
+ 
   pool.query("SELECT Ordini.id, Classi.anno, Classi.sezione, Pizze.nome, Pizze.prezzo FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id JOIN Classi ON Studenti.id_classe = Classi.id JOIN Pizze ON Ordini.id_pizza = Pizze.id;", (err, result) => {
     if (err) {
       console.error(err);
       res.send([]);
     } else {
       const Ordini=result.rows;
-      res.send(Ordini);
+      const newOrders = Ordini.map((order) => {
+        return {
+          id: order.id,
+          nome: order.anno + "" + order.sezione,
+          pizza: order.nome,
+          prezzo: order.prezzo
+        };
+      });
+      res.send(newOrders);
     }
     pool.end();
   });
