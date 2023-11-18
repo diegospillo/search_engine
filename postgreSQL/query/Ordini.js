@@ -148,7 +148,7 @@ function Get_ordini_classe(req, res) {
 function Get_ordini_classi(req, res) {
   const pool = connection();
   const id = req.query.id;
-  pool.query("SELECT Ordini.id, Studenti.nome, Studenti.cognome FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id", (err, result) => {
+  pool.query("SELECT Ordini.id, Classi.anno, Classi.sezione FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id JOIN Classi ON Studenti.id_classe = Classi.id;", (err, result) => {
     if (err) {
       console.error(err);
       res.send([]);
