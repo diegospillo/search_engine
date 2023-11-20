@@ -31,6 +31,12 @@ async function getOrdini(id) {
     return data_res;
 }
 
+async function getAmministratori(id) {
+    const response = await axios.get(url+'/get_Amministratori');
+    const data_res = filter(response,id);
+    return data_res;
+}
+
 function filter(response,id){
     let data_res = response.data;
     if(data_res.length>0){
@@ -52,5 +58,6 @@ module.exports = {
     get_pizze: getPizze,
     get_studenti: getStudenti,
     get_ordini: getOrdini,
+    get_amministratori: getAmministratori,
     truncate_ordini: truncate_Ordini
 }

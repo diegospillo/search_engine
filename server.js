@@ -10,6 +10,7 @@ const Classi = require('./postgreSQL/query/Classi');
 const Studenti = require('./postgreSQL/query/Studenti');
 const Pizze = require('./postgreSQL/query/Pizze');
 const Ordini = require('./postgreSQL/query/Ordini');
+const Amministratori = require('./postgreSQL/query/Amministratori')
 
 const request = require('./request_axios/request');
 
@@ -60,6 +61,11 @@ app.get("/Ordini", async(req,res)=>{
     const data_res = await request.get_ordini(id);
     res.render("workbranch", {tabella:"Ordini",data: await data_res.data, paramaters: data_res.parametri})
 })
+app.get("/Amministratori", async(req,res)=>{
+    const id = req.query.id;
+    const data_res = await request.get_amministratori(id);
+    res.render("workbranch", {tabella:"Ordini",data: await data_res.data, paramaters: data_res.parametri})
+})
 
 
 ////////////////////////////////////////////////// QUERY
@@ -92,6 +98,15 @@ app.get("/drop_Ordine", (req,res)=>Ordini.drop(req,res))//USE
 app.get("/truncate_Ordini", (req,res)=>Ordini.truncate(req,res))
 app.get("/drop_table_Ordini", (req,res)=>Ordini.drop_table(req,res))
 app.get("/get_Ordini_All_Classi", (req,res)=>Ordini.get_ordini_all_classi(req,res))//USE
+
+app.get("/get_Amministratori", (req,res)=>Amministratori.get(req,res))
+app.get("/check_id_Amministratori", (req,res)=>Amministratori.check_id(req,res))//USE
+app.get("/create_Amministratori", (req,res)=>Amministratori.create(req,res))
+app.get("/insert_Amministratori", (req,res)=>Amministratori.insert(req,res))//USE
+app.get("/drop_Amministratori", (req,res)=>Amministratori.drop(req,res))
+app.get("/alter_Amministratori", (req,res)=>Amministratori.alter(req,res))
+app.get("/truncate_Amministratori", (req,res)=>Amministratori.truncate(req,res))
+app.get("/get_Amministratore", (req,res)=>Amministratori.get_amministratore(req,res))//USE
 
 
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})
