@@ -64,7 +64,7 @@ app.get("/Ordini", async(req,res)=>{
 app.get("/Amministratori", async(req,res)=>{
     const id = req.query.id;
     const data_res = await request.get_amministratori(id);
-    res.render("workbranch", {tabella:"Ordini",data: await data_res.data, paramaters: data_res.parametri})
+    res.render("workbranch", {tabella:"Amministratori",data: await data_res.data, paramaters: data_res.parametri})
 })
 
 
