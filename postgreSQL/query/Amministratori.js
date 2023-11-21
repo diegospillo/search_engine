@@ -38,12 +38,17 @@ async function Insert(req, res) {
     email: req.query.email
 }
 
-const nome_client = client.nome.replace("'", "");
-const cognome_client = client.cognome.replace("'", "");
-const email_client = client.email.replace("'", "");
+const nome_client = client.nome.replace(/'/g, "''");
+const cognome_client = client.cognome.replace(/'/g, "''");
+const email_client = client.email.replace(/'/g, "''");
 
 const query = `INSERT INTO Amministratori (id, Nome, Cognome, Email) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}');`;
 
+pool.query(`DELETE FROM Pool WHERE id = '${client.id}';`, (err, result) => {
+  if (err) {
+    console.error(err);
+    res.json({ stato: false })
+  } else {
 pool.query(query,(err, result) => {
       if (err) {
         console.error(err);
@@ -56,6 +61,8 @@ pool.query(query,(err, result) => {
       }
     }
   );
+}
+});
 }
 
 function Drop(req, res) {

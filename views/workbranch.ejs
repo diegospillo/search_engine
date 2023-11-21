@@ -16,6 +16,7 @@
         <a href="/Studenti"><button type="button" class="btn btn-primary">Studenti</button></a>
         <a href="/Ordini"><button type="button" class="btn btn-primary">Ordini</button></a>
         <a href="/Amministratori"><button type="button" class="btn btn-primary">Amministratori</button></a>
+        <a href="/Pool"><button type="button" class="btn btn-primary">Pool</button></a>
       </div>
     </center>
     <h1><%=tabella%></h1>
@@ -60,6 +61,9 @@
                 break;
             } %>
             <% } %>
+            <% if(tabella=="Pool"){%>
+            <td><button><a href="https://pizzappbackend.onrender.com/insert_Amministratori?id=<%=data[i]['id']%>&nome=<%=data[i]['nome']%>&cognome=<%=data[i]['cognome']%>&email=<%=data[i]['email']%>">Accetta</a></button></td>
+            <%}%>
             <td><button><a href="https://pizzappbackend.onrender.com/drop_<%=tabella%>?id=<%=data[i]['id']%>">Elimina</a></button></td>
         </tr>
     <% } %>

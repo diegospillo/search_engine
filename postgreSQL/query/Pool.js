@@ -38,9 +38,9 @@ async function Insert(req, res) {
     email: req.query.email
 }
 
-const nome_client = client.nome.replace("'", "");
-const cognome_client = client.cognome.replace("'", "");
-const email_client = client.email.replace("'", "");
+const nome_client = client.nome.replace(/'/g, "''");
+const cognome_client = client.cognome.replace(/'/g, "''");
+const email_client = client.email.replace(/'/g, "''");
 
 const query = `INSERT INTO Pool (id, Nome, Cognome, Email) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}');`;
 
