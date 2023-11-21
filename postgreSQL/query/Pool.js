@@ -3,7 +3,7 @@ const connection = require("../connectionDB");
 function Create(req, res){
   const pool = connection();
 
-  pool.query("CREATE TABLE Amministratori (id VARCHAR(100) PRIMARY KEY, nome VARCHAR(20) NOT NULL, cognome VARCHAR(20) NOT NULL, email VARCHAR(50) NOT NULL)", (err, result) => {
+  pool.query("CREATE TABLE Pool (id VARCHAR(100) PRIMARY KEY, nome VARCHAR(20) NOT NULL, cognome VARCHAR(20) NOT NULL, email VARCHAR(50) NOT NULL)", (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -17,7 +17,7 @@ function Create(req, res){
 
 function Get(req, res) {
   const pool = connection();
-  pool.query("SELECT * FROM Amministratori;", (err, result) => {
+  pool.query("SELECT * FROM Pool;", (err, result) => {
     if (err) {
       console.error(err);
       res.send([]);
@@ -42,7 +42,7 @@ const nome_client = client.nome.replace("'", "");
 const cognome_client = client.cognome.replace("'", "");
 const email_client = client.email.replace("'", "");
 
-const query = `INSERT INTO Amministratori (id, Nome, Cognome, Email) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}');`;
+const query = `INSERT INTO Pool (id, Nome, Cognome, Email) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}');`;
 
 pool.query(query,(err, result) => {
       if (err) {
@@ -61,7 +61,7 @@ pool.query(query,(err, result) => {
 function Drop(req, res) {
   const pool = connection();
 
-  pool.query("DROP TABLE Amministratori", (err, result) => {
+  pool.query("DROP TABLE Pool", (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -75,7 +75,7 @@ function Alter(req, res){
   const pool = connection();
 
 pool.query(
-  "ALTER TABLE Amministratori ALTER COLUMN id TYPE varchar(50);",
+  "ALTER TABLE Pool ALTER COLUMN id TYPE varchar(50);",
   (err, result) => {
     if (err) {
       console.error(err);
@@ -90,7 +90,7 @@ pool.query(
 function Truncate(req, res) {
   const pool = connection();
 
-  pool.query("TRUNCATE Amministratori", (err, result) => {
+  pool.query("TRUNCATE Pool", (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -103,7 +103,7 @@ function Truncate(req, res) {
 function Check_id(req, res){
   const pool = connection();
   const id = req.query.id;
-  pool.query(`SELECT * FROM Amministratori WHERE id = '${id}';`, (err, result) => {
+  pool.query(`SELECT * FROM Pool WHERE id = '${id}';`, (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -120,19 +120,6 @@ function Check_id(req, res){
   });
 }
 
-function Get_Amministratore(req, res) {
-  const pool = connection();
-  const id = req.query.id;
-  pool.query(`SELECT * FROM Amministratori WHERE id = '${id}';`, (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      const studente = result.rows;
-          res.send(studente);
-          pool.end();
-        }
-      });
-    }
 
 module.exports = {
   create: Create,
@@ -141,6 +128,5 @@ module.exports = {
   insert: Insert,
   drop: Drop,
   truncate: Truncate,
-  check_id: Check_id,
-  get_amministratore: Get_Amministratore
+  check_id: Check_id
 };

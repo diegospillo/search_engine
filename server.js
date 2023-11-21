@@ -11,6 +11,7 @@ const Studenti = require('./postgreSQL/query/Studenti');
 const Pizze = require('./postgreSQL/query/Pizze');
 const Ordini = require('./postgreSQL/query/Ordini');
 const Amministratori = require('./postgreSQL/query/Amministratori')
+const Pool = require('./postgreSQL/query/Pool')
 
 const request = require('./request_axios/request');
 
@@ -66,6 +67,12 @@ app.get("/Amministratori", async(req,res)=>{
     const data_res = await request.get_amministratori(id);
     res.render("workbranch", {tabella:"Amministratori",data: await data_res.data, paramaters: data_res.parametri})
 })
+app.get("/Pool", async(req,res)=>{
+    const id = req.query.id;
+    const data_res = await request.get_pool(id);
+    res.render("workbranch", {tabella:"Pool",data: await data_res.data, paramaters: data_res.parametri})
+})
+
 
 
 ////////////////////////////////////////////////// QUERY
@@ -107,6 +114,14 @@ app.get("/drop_Amministratori", (req,res)=>Amministratori.drop(req,res))
 app.get("/alter_Amministratori", (req,res)=>Amministratori.alter(req,res))
 app.get("/truncate_Amministratori", (req,res)=>Amministratori.truncate(req,res))
 app.get("/get_Amministratore", (req,res)=>Amministratori.get_amministratore(req,res))//USE
+
+app.get("/get_Pool", (req,res)=>Pool.get(req,res))
+app.get("/check_id_Pool", (req,res)=>Pool.check_id(req,res))//USE
+app.get("/create_Pool", (req,res)=>Pool.create(req,res))
+app.get("/insert_Pool", (req,res)=>Pool.insert(req,res))//USE
+app.get("/drop_Pool", (req,res)=>Pool.drop(req,res))
+app.get("/alter_Pool", (req,res)=>Pool.alter(req,res))
+app.get("/truncate_Pool", (req,res)=>Pool.truncate(req,res))
 
 
 app.listen(PORT, () => {console.log("Server start on port " + PORT)})

@@ -37,6 +37,12 @@ async function getAmministratori(id) {
     return data_res;
 }
 
+async function getPool(id) {
+    const response = await axios.get(url+'/get_Pool');
+    const data_res = filter(response,id);
+    return data_res;
+}
+
 function filter(response,id){
     let data_res = response.data;
     if(data_res.length>0){
@@ -59,5 +65,6 @@ module.exports = {
     get_studenti: getStudenti,
     get_ordini: getOrdini,
     get_amministratori: getAmministratori,
+    get_pool: getPool,
     truncate_ordini: truncate_Ordini
 }

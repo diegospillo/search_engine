@@ -21,8 +21,12 @@
     <h1><%=tabella%></h1>
     <% if(data){ %>
     <form action="https://pizzappbackend.onrender.com/insert_<%=tabella%>" method="get">
-      <% for(let i=1;i<paramaters.length;i++){%>
+      <% for(let i=0;i<paramaters.length;i++){%>
+        <% if((tabella=="Studenti")||(tabella=="Amministratori")){%>
         <input type="text" name="<%= paramaters[i] %>" placeholder="inserisci <%=paramaters[i]%>">
+        <% }else if(i>0){%>
+        <input type="text" name="<%= paramaters[i] %>" placeholder="inserisci <%=paramaters[i]%>">
+        <% } %>
       <% } %>
       <input type="submit" value="Inserisci">
     </form>
