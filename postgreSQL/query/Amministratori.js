@@ -67,12 +67,13 @@ pool.query(query,(err, result) => {
 
 function Drop(req, res) {
   const pool = connection();
-
-  pool.query("DROP TABLE Amministratori", (err, result) => {
+  const id = req.query.id;
+  pool.query(`DELETE FROM Amministratori WHERE id = '${id}';`, (err, result) => {
     if (err) {
       console.error(err);
+      res.json({ stato: false })
     } else {
-      res.send("Tabella eliminata con successo!");
+      res.send("Utente eliminato con successo!");
       pool.end();
     }
   });
