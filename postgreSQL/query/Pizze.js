@@ -30,20 +30,22 @@ function Get(req, res) {
 
 function Insert(req, res) {
   const pool = connection();
+  const id = req.query.id;
   const nome = req.query.nome;
   const prezzo = req.query.prezzo;
+  const date = new Date();
+  var data_oggi = date.getFullYear() + "-" + (date.getMonth()+ 1) + "-" + date.getDate();
+
   pool.query(
     `INSERT INTO Pizze (Nome, prezzo) VALUES ('${nome}', ${prezzo});`,
     (err, result) => {
       if (err) {
         console.error(err);
-        res.send(false);
-      } else {
-        res.send(true);
       }
-      pool.end();
     }
   );
+  res.redirect(`${url}/amministratore?id=${id}&data=${data_oggi}`);
+  pool.end();
 }
 
 function Alter(req, res){

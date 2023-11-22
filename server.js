@@ -91,9 +91,9 @@ app.get("/truncate_Studenti", (req,res)=>Studenti.truncate(req,res))
 app.get("/get_Studente", (req,res)=>Studenti.get_studente(req,res))//USE
 
 app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))//USE
-app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))
+app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))//USE
 app.get("/alter_Pizze", (req,res)=>Pizze.alter(req,res))
-app.get("/drop_Pizze", (req,res)=>Pizze.drop(req,res))
+app.get("/drop_Pizze", (req,res)=>Pizze.drop(req,res))//USE
 
 app.get("/create_Ordini", (req,res)=>Ordini.create(req,res))
 app.get("/get_Ordini", (req,res)=>Ordini.get_all(req,res))
