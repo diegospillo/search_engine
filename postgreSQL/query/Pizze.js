@@ -44,10 +44,10 @@ function Insert(req, res) {
       if (err) {
         console.error(err);
       }
+      res.redirect(`${url}/amministratore?id=${id}&data=${data_oggi}`);
+      pool.end();
     }
   );
-  res.redirect(`${url}/amministratore?id=${id}&data=${data_oggi}`);
-  pool.end();
 }
 
 function Alter(req, res){
