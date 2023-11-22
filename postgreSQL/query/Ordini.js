@@ -219,10 +219,9 @@ function Drop(req, res) {
   pool.query(`DELETE FROM Ordini WHERE id = ${id_ordine};`, (err, result) => {
     if (err) {
       console.error(err);
-    } else {
+    }
       res.redirect(`${url}/ordine?id=${id_studente}&stato=true`);
       pool.end();
-    }
   });
 }
 

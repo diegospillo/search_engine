@@ -68,14 +68,15 @@ function Alter(req, res){
 
 function Drop(req, res) {
   const pool = connection();
+  const id_studente = req.query.id_client;
   const id = req.query.id;
+  const date = new Date();
+  var data_oggi = date.getFullYear() + "-" + (date.getMonth()+ 1) + "-" + date.getDate();
   pool.query(`DELETE FROM Pizze WHERE id = ${id};`, (err, result) => {
     if (err) {
       console.error(err);
-      res.send(false);
-    } else {
-      res.send(true);
     }
+    res.redirect(`${url}/amministratore?id=${id_studente}&data=${data_oggi}`);
     pool.end();
   });
 }
