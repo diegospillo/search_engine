@@ -72,10 +72,7 @@ function Get_ordini_classe(req, res) {
     if (err) {
       console.error(err);
       res.send([]);
-    } else if (result.rows.length == 0) {
-      console.error("Studente inesistente.");
-      res.send([]);
-    } else {
+    } else{
       const ordini = result.rows;
       const newOrders = ordini.map((order) => {
         return {
