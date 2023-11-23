@@ -37,47 +37,61 @@ function Get_ordini_studente(req, res) {
   const pool = connection();
   const id = req.query.id;
   pool.query(
-    "SELECT Ordini.id, Pizze.nome, Pizza.prezzo FROM Ordini JOIN Pizze ON Ordini.id_pizza = Pizze.id WHERE Ordini.id_studente = $1::text AND Ordini.data = CURRENT_DATE;",
+    "SELECT * FROM Studenti WHERE id = $1::text;",
     [id],
-    (err, result) => {
+    (err, result1) => {
       if (err) {
         console.error(err);
         res.send([]);
-      } else {
-        const ordini = result.rows;
-        res.send(ordini);
         pool.end();
+      } else {
+        const id_classe = result1.rows.id_classe;
+        pool.query(
+          "SELECT Ordini.id, Pizze.nome, Pizze.prezzo FROM Ordini JOIN Pizze ON Ordini.id_pizza = Pizze.id WHERE Studenti.id_classe = $1::text AND Ordini.data = CURRENT_DATE;",
+          [id_classe],
+          (err, result) => {
+            if (err) {
+              console.error(err);
+              res.send([]);
+            } else {
+              const ordini = result.rows;
+              res.send(ordini);
+              pool.end();
+            }
+          }
+        );
       }
     }
   );
 }
 
-
 // RICORDA SQL INJECTION
 function Get_ordini_classe(req, res) {
   const pool = connection();
   const id = req.query.id;
-  pool.query("SELECT Ordini.id, Studenti.nome, Studenti.cognome, Pizze.nome AS pizza, Pizze.prezzo, Studenti.id_classe FROM Studenti JOIN Ordini ON Ordini.id_studente = Studenti.id JOIN Pizze ON Pizze.id = Ordini.id_pizza WHERE Studenti.id = $1::text;",
-  [id], (err, result) => {
-    if (err) {
-      console.error(err);
-      res.send([]);
-    } else if (result.rows == 0) {
-      console.error("Studente inesistente.");
-      res.send([]);
-    } else {
-      const ordini = result.rows;
-      const newOrders = ordini.map((order) => {
-        return {
-          id: order.id,
-          nome: order.nome + " " + order.cognome,
-          pizza: order.pizza,
-          prezzo: order.prezzo,
-        };
-      });
-      res.send(newOrders);
-      pool.end();
-      /*const studente = result.rows[0];
+  pool.query(
+    "SELECT Ordini.id, Studenti.nome, Studenti.cognome, Pizze.nome AS pizza, Pizze.prezzo, Studenti.id_classe FROM (Studenti JOIN Ordini ON Ordini.id_studente = Studenti.id) JOIN Pizze ON Pizze.id = Ordini.id_pizza WHERE Studenti.id_classe = $1::text;",
+    [id],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        res.send([]);
+      } else if (result.rows == 0) {
+        console.error("Studente inesistente.");
+        res.send([]);
+      } else {
+        const ordini = result.rows;
+        const newOrders = ordini.map((order) => {
+          return {
+            id: order.id,
+            nome: order.nome + " " + order.cognome,
+            pizza: order.pizza,
+            prezzo: order.prezzo,
+          };
+        });
+        res.send(newOrders);
+        pool.end();
+        /*const studente = result.rows[0];
       const id_classe = studente.id_classe;
       pool.query(
         "SELECT * FROM Studenti WHERE id_classe = $1",
@@ -136,15 +150,16 @@ function Get_ordini_classe(req, res) {
           }
         }
       );*/
+      }
     }
-  });
+  );
 }
 
 //Amministratore
 
 function Get_ordini_classi(req, res) {
   const pool = connection();
-  const data = req.query.data; 
+  const data = req.query.data;
   pool.query(
     "SELECT Ordini.id, Classi.anno, Classi.sezione, Pizze.nome, Pizze.prezzo FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id JOIN Classi ON Studenti.id_classe = Classi.id JOIN Pizze ON Ordini.id_pizza = Pizze.id WHERE Ordini.data=$1::text;",
     [data],
@@ -153,13 +168,13 @@ function Get_ordini_classi(req, res) {
         console.error(err);
         res.send([]);
       } else {
-        const Ordini=result.rows;
+        const Ordini = result.rows;
         const newOrders = Ordini.map((order) => {
           return {
             id: order.id,
             nome: order.anno + "" + order.sezione,
             pizza: order.nome,
-            prezzo: order.prezzo
+            prezzo: order.prezzo,
           };
         });
         res.send(newOrders);
@@ -218,13 +233,17 @@ function Drop(req, res) {
   const pool = connection();
   const id_studente = req.query.id_client;
   const id_ordine = req.query.id_ordine;
-  pool.query("DELETE FROM Ordini WHERE id = $1;", [id_ordine], (err, result) => {
-    if (err) {
-      console.error(err);
-    }
+  pool.query(
+    "DELETE FROM Ordini WHERE id = $1;",
+    [id_ordine],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+      }
       res.redirect(`${url}/ordine?id=${id_studente}&stato=true`);
       pool.end();
-  });
+    }
+  );
 }
 
 function Truncate(req, res) {
@@ -261,7 +280,7 @@ module.exports = {
   get_all: Get_All,
   get_ordini_studente: Get_ordini_studente,
   get_ordini_classe: Get_ordini_classe,
-  get_ordini_all_classi:Get_ordini_classi,
+  get_ordini_all_classi: Get_ordini_classi,
   insert: Insert,
   drop: Drop,
   drop_table: Drop_table,
