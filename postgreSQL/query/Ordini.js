@@ -138,7 +138,7 @@ function Insert(req, res) {
   }
   id_pizze.forEach((id_pizza) => {
     pool.query(
-      "INSERT INTO Ordini (id_Studente, id_Pizza) VALUES ($1::text, $2::text);",
+      "INSERT INTO Ordini (id_Studente, id_Pizza) VALUES ($1::text, $2);",
       [id_studente, id_pizza],
       (err, result) => {
         if (err) {
