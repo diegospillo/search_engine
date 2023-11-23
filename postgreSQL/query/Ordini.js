@@ -96,7 +96,7 @@ function Get_ordini_classi(req, res) {
   const pool = connection();
   const data = req.query.data; 
   pool.query(
-    "SELECT Ordini.id, Classi.anno, Classi.sezione, Pizze.nome, Pizze.prezzo FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id JOIN Classi ON Studenti.id_classe = Classi.id JOIN Pizze ON Ordini.id_pizza = Pizze.id WHERE Ordini.data=$1;",
+    "SELECT Ordini.id, Classi.anno, Classi.sezione, Pizze.nome, Pizze.prezzo FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id JOIN Classi ON Studenti.id_classe = Classi.id JOIN Pizze ON Ordini.id_pizza = Pizze.id WHERE Ordini.data = $1;",
     [data],
     (err, result) => {
       if (err) {
