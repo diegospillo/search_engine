@@ -66,8 +66,8 @@ function Get_ordini_classe(req, res) {
         res.send([]);
         pool.end();
       } else {
-        const id_classe = result1.rows.id_classe;
-  pool.query("SELECT Ordini.id, Studenti.nome, Studenti.cognome, Pizze.nome AS pizza, Pizze.prezzo, Studenti.id_classe FROM (Studenti JOIN Ordini ON Ordini.id_studente = Studenti.id) JOIN Pizze ON Pizze.id = Ordini.id_pizza WHERE Studenti.id_classe = $1;",
+        const id_classe = result1.rows[0].id_classe;
+  pool.query("SELECT Ordini.id, Studenti.nome, Studenti.cognome, Pizze.nome AS pizza, Pizze.prezzo FROM Studenti JOIN Ordini ON Ordini.id_studente = Studenti.id JOIN Pizze ON Pizze.id = Ordini.id_pizza WHERE Studenti.id_classe = $1 AND Ordini.data = CURRENT_DATE;",
   [id_classe], (err, result) => {
     if (err) {
       console.error(err);
