@@ -21,7 +21,8 @@ function Insert(req, res) {
   const anno = req.query.anno;
   const sezione = req.query.sezione;
   pool.query(
-    `INSERT INTO Classi (anno, sezione) VALUES ('${anno}', '${sezione}');`,
+    'INSERT INTO Classi (anno, sezione) VALUES ($1::text, $2::text);',
+    [anno, sezione],
     (err, result) => {
       if (err) {
         console.error(err);
@@ -37,7 +38,7 @@ function Insert(req, res) {
 function Drop(req, res) {
   const pool = connection();
   const id=req.query.id;
-  pool.query(`DELETE FROM Classi WHERE id = ${id};`, (err, result) => {
+  pool.query('DELETE FROM Classi WHERE id = $1::text;', [id], (err, result) => {
     if (err) {
       console.error(err);
       res.send(false);

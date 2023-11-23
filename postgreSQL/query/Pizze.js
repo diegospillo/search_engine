@@ -39,7 +39,8 @@ function Insert(req, res) {
   var data_oggi = date.getFullYear() + "-" + (date.getMonth()+ 1) + "-" + date.getDate();
 
   pool.query(
-    `INSERT INTO Pizze (Nome, prezzo) VALUES ('${nome}', ${prezzo});`,
+    "INSERT INTO Pizze (Nome, prezzo) VALUES ($1::text, $2);",
+    [nome, prezzo],
     (err, result) => {
       if (err) {
         console.error(err);
@@ -72,7 +73,7 @@ function Drop(req, res) {
   const id = req.query.id;
   const date = new Date();
   var data_oggi = date.getFullYear() + "-" + (date.getMonth()+ 1) + "-" + date.getDate();
-  pool.query(`DELETE FROM Pizze WHERE id = ${id};`, (err, result) => {
+  pool.query("DELETE FROM Pizze WHERE id = $1;", [id], (err, result) => {
     if (err) {
       console.error(err);
     }

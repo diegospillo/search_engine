@@ -37,7 +37,8 @@ function Get_ordini_studente(req, res) {
   const pool = connection();
   const id = req.query.id;
   pool.query(
-    `SELECT * FROM Ordini WHERE id_studente = '${id}' AND data = CURRENT_DATE;`, //MODIFY
+    "SELECT * FROM Ordini WHERE id_studente = $1::text AND data = CURRENT_DATE;", //MODIFY
+    [id],
     (err, result) => {
       if (err) {
         console.error(err);
@@ -46,7 +47,7 @@ function Get_ordini_studente(req, res) {
         const ordini = result.rows;
         const id_pizze = ordini.map((ordine) => ordine.id_pizza);
         pool.query(
-          `SELECT * FROM Pizze WHERE id IN (${id_pizze});`,
+          `SELECT * FROM Pizze WHERE id IN (${id_pizze});`, // QUESTA VIENE CAMBIATA ASAP USA JOIN
           (err, result1) => {
             if (err) {
               console.error(err);
@@ -74,17 +75,24 @@ function Get_ordini_studente(req, res) {
   );
 }
 
+
+// RICORDA SQL INJECTION
 function Get_ordini_classe(req, res) {
   const pool = connection();
   const id = req.query.id;
-  pool.query(`SELECT * FROM Studenti WHERE id = '${id}';`, (err, result) => {
+  pool.query("SELECT * FROM Studenti WHERE id = $1::text;", [id], (err, result) => {
     if (err) {
       console.error(err);
+      res.send([]);
+    } else if (result.rows == 0) {
+      console.error("Studente inesistente.");
+      res.send([]);
     } else {
-      const studente = result.rows;
-      const id_classe = studente.map((stud) => stud.id_classe);
+      const studente = result.rows[0];
+      const id_classe = studente.id_classe;
       pool.query(
-        `SELECT * FROM Studenti WHERE id_classe = ${id_classe}`,
+        "SELECT * FROM Studenti WHERE id_classe = $1",
+        [id_classe],
         (err, result1) => {
           if (err) {
             console.error(err);
@@ -148,24 +156,28 @@ function Get_ordini_classe(req, res) {
 function Get_ordini_classi(req, res) {
   const pool = connection();
   const data = req.query.data; 
-  pool.query(`SELECT Ordini.id, Classi.anno, Classi.sezione, Pizze.nome, Pizze.prezzo FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id JOIN Classi ON Studenti.id_classe = Classi.id JOIN Pizze ON Ordini.id_pizza = Pizze.id WHERE Ordini.data='${data}';`, (err, result) => {
-    if (err) {
-      console.error(err);
-      res.send([]);
-    } else {
-      const Ordini=result.rows;
-      const newOrders = Ordini.map((order) => {
-        return {
-          id: order.id,
-          nome: order.anno + "" + order.sezione,
-          pizza: order.nome,
-          prezzo: order.prezzo
-        };
-      });
-      res.send(newOrders);
+  pool.query(
+    "SELECT Ordini.id, Classi.anno, Classi.sezione, Pizze.nome, Pizze.prezzo FROM Ordini INNER JOIN Studenti ON Ordini.id_studente = Studenti.id JOIN Classi ON Studenti.id_classe = Classi.id JOIN Pizze ON Ordini.id_pizza = Pizze.id WHERE Ordini.data=$1::text;",
+    [data],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        res.send([]);
+      } else {
+        const Ordini=result.rows;
+        const newOrders = Ordini.map((order) => {
+          return {
+            id: order.id,
+            nome: order.anno + "" + order.sezione,
+            pizza: order.nome,
+            prezzo: order.prezzo
+          };
+        });
+        res.send(newOrders);
+      }
+      pool.end();
     }
-    pool.end();
-  });
+  );
 }
 
 ///
@@ -184,7 +196,8 @@ function Insert(req, res) {
   }
   id_pizze.forEach((id_pizza) => {
     pool.query(
-      `INSERT INTO Ordini (id_Studente, id_Pizza) VALUES ('${id_studente}', ${id_pizza});`,
+      "INSERT INTO Ordini (id_Studente, id_Pizza) VALUES ($1::text, $2::text);",
+      [id_studente, id_pizza],
       (err, result) => {
         if (err) {
           console.error(err);
@@ -216,7 +229,7 @@ function Drop(req, res) {
   const pool = connection();
   const id_studente = req.query.id_client;
   const id_ordine = req.query.id_ordine;
-  pool.query(`DELETE FROM Ordini WHERE id = ${id_ordine};`, (err, result) => {
+  pool.query("DELETE FROM Ordini WHERE id = $1;", [id_ordine], (err, result) => {
     if (err) {
       console.error(err);
     }

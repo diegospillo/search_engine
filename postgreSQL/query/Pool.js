@@ -42,9 +42,9 @@ const nome_client = client.nome.replace(/'/g, "''");
 const cognome_client = client.cognome.replace(/'/g, "''");
 const email_client = client.email.replace(/'/g, "''");
 
-const query = `INSERT INTO Pool (id, Nome, Cognome, Email) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}');`;
+const query = "INSERT INTO Pool (id, Nome, Cognome, Email) VALUES ($1::text, $2::text, $3::text, $4::text);";
 
-pool.query(query,(err, result) => {
+pool.query(query, [client.id, nome_client, cognome_client, email_client], (err, result) => {
       if (err) {
         console.error(err);
         res.json({ stato: false })
@@ -61,7 +61,7 @@ pool.query(query,(err, result) => {
 function Drop(req, res) {
   const pool = connection();
   const id = req.query.id;
-  pool.query(`DELETE FROM Pool WHERE id = '${id}';`, (err, result) => {
+  pool.query("DELETE FROM Pool WHERE id = $1::text;", [id], (err, result) => {
     if (err) {
       console.error(err);
       res.json({ stato: false })
@@ -104,7 +104,7 @@ function Truncate(req, res) {
 function Check_id(req, res){
   const pool = connection();
   const id = req.query.id;
-  pool.query(`SELECT * FROM Pool WHERE id = '${id}';`, (err, result) => {
+  pool.query("SELECT * FROM Pool WHERE id = $1::text;", [id], (err, result) => {
     if (err) {
       console.error(err);
     } else {

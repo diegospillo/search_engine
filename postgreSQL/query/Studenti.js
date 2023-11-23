@@ -43,9 +43,9 @@ const nome_client = client.nome.replace(/'/g, "''");
 const cognome_client = client.cognome.replace(/'/g, "''");
 const email_client = client.email.replace(/'/g, "''");
 
-const query = `INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}', ${client.classe});`;
+const query = "INSERT INTO Studenti (id, Nome, Cognome, Email, id_Classe) VALUES ($1::text, $2::text, $3::text, $4::text, $5);";
 console.log(query); 
-pool.query(query,(err, result) => {
+pool.query(query, [client.id, nome_client, cognome_client, email_client, client.classe], (err, result) => {
       if (err) {
         console.error(err);
         res.json({ stato: false })
@@ -62,7 +62,7 @@ pool.query(query,(err, result) => {
 function Drop(req, res) {
   const pool = connection();
   const id = req.query.id;
-  pool.query(`DELETE FROM Studenti WHERE id = '${id}';`, (err, result) => {
+  pool.query("DELETE FROM Studenti WHERE id = $1::text;", [id], (err, result) => {
     if (err) {
       console.error(err);
       res.json({ stato: false })
@@ -105,7 +105,7 @@ function Truncate(req, res) {
 function Check_id(req, res){
   const pool = connection();
   const id = req.query.id;
-  pool.query(`SELECT * FROM Studenti WHERE id = '${id}';`, (err, result) => {
+  pool.query("SELECT * FROM Studenti WHERE id = $1::text;", [id], (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -125,12 +125,12 @@ function Check_id(req, res){
 function Get_Studente(req, res) {
   const pool = connection();
   const id = req.query.id;
-  pool.query(`SELECT * FROM Studenti WHERE id = '${id}';`, (err, result) => {
+  pool.query("SELECT * FROM Studenti WHERE id = $1::text;", [id], (err, result) => {
     if (err) {
       console.error(err);
     } else {
       const studente = result.rows;
-      pool.query(`SELECT * FROM Classi WHERE id = ${studente[0].id_classe};`, (err, result1) => {
+      pool.query("SELECT * FROM Classi WHERE id = $1;", [studente[0].id_classe], (err, result1) => {
         if (err) {
           console.error(err);
         } else {
