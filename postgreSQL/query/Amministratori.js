@@ -136,9 +136,15 @@ function Get_Amministratore(req, res) {
     if (err) {
       console.error(err);
     } else {
-      const studente = result.rows;
-          res.send(studente);
+      const amministratore = result.rows;
+      if(amministratore.length==0){
+        res.send([]);
+        pool.end();
+      }
+      else{
+          res.send(amministratore);
           pool.end();
+      }
         }
       });
     }

@@ -130,6 +130,12 @@ function Get_Studente(req, res) {
       console.error(err);
     } else {
       const studente = result.rows;
+      if(studente.length==0){
+        console.error("Studente non trovato");
+        res.send([]);
+        pool.end();
+      }
+      else{
       pool.query("SELECT * FROM Classi WHERE id = $1;", [studente[0].id_classe], (err, result1) => {
         if (err) {
           console.error(err);
@@ -148,6 +154,7 @@ function Get_Studente(req, res) {
           pool.end();
         }
       });
+    }
     }
   });
 }
