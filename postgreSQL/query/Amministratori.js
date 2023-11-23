@@ -42,29 +42,31 @@ const nome_client = client.nome.replace(/'/g, "''");
 const cognome_client = client.cognome.replace(/'/g, "''");
 const email_client = client.email.replace(/'/g, "''");
 
-const query = `INSERT INTO Amministratori (id, Nome, Cognome, Email) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}');`;
+//const query = `INSERT INTO Amministratori (id, Nome, Cognome, Email) VALUES ('${client.id}', '${nome_client}', '${cognome_client}', '${email_client}');`;
+const query = `INSERT INTO Amministratori (id, Nome, Cognome, Email) VALUES ($1::text, $2::text, $3::text, $4::text);`;
 
-pool.query(`DELETE FROM Pool WHERE id = '${client.id}';`, (err, result) => {
+pool.query('DELETE FROM Pool WHERE id = $1::text;', [client.id], (err, result) => {
   if (err) {
     console.error(err);
     res.json({ stato: false })
   } else {
-pool.query(query,(err, result) => {
-      if (err) {
-        console.error(err);
-        res.json({ stato: false })
-        pool.end();
-      } else {
-        console.log("Dati inseriti con successo!");
-        res.json({ stato: true });
-        pool.end();
-      }
+    pool.query(query, [client.id, nome_client, cognome_client, email_client], (err, result) => {
+          if (err) {
+            console.error(err);
+            res.json({ stato: false })
+            pool.end();
+          } else {
+            console.log("Dati inseriti con successo!");
+            res.json({ stato: true });
+            pool.end();
+          }
+        }
+      );
     }
-  );
-}
-});
+  });
 }
 
+// TODO: rendi TUTTO sicuro
 function Drop(req, res) {
   const pool = connection();
   const id = req.query.id;
