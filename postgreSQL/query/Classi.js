@@ -51,7 +51,7 @@ function Insert(req, res) {
 function Drop(req, res) {
   const pool = connection();
   const id=req.query.id;
-  pool.query('DELETE FROM Classi WHERE id = $1::text;', [id], (err, result) => {
+  pool.query('DELETE FROM Classi WHERE id = $1;', [id], (err, result) => {
     if (err) {
       console.error(err);
       res.send(false);

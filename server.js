@@ -77,6 +77,7 @@ app.get("/Pool", async(req,res)=>{
 
 ////////////////////////////////////////////////// QUERY
 
+//DONE
 app.get("/create_Classi", (req,res)=>Classi.create(req,res))
 app.get("/get_Classi", (req,res)=>Classi.get(req,res))//USE
 app.get("/insert_Classi", (req,res)=>Classi.insert(req,res))
@@ -92,7 +93,7 @@ app.get("/alter_Studenti", (req,res)=>Studenti.alter(req,res))
 app.get("/truncate_Studenti", (req,res)=>Studenti.truncate(req,res))
 app.get("/get_Studente", (req,res)=>Studenti.get_studente(req,res))//USE
 
-
+//DONE
 app.get("/create_Pizze", (req,res)=>Pizze.create(req,res))
 app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))//USE
 app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))//USE
