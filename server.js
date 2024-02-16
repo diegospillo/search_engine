@@ -77,10 +77,12 @@ app.get("/Pool", async(req,res)=>{
 
 ////////////////////////////////////////////////// QUERY
 
+app.get("/create_Classi", (req,res)=>Classi.create(req,res))
 app.get("/get_Classi", (req,res)=>Classi.get(req,res))//USE
 app.get("/insert_Classi", (req,res)=>Classi.insert(req,res))
 app.get("/drop_Classi", (req,res)=>Classi.drop(req,res))
 
+//DONE
 app.get("/get_Studenti", (req,res)=>Studenti.get(req,res))
 app.get("/check_id_Studenti", (req,res)=>Studenti.check_id(req,res))//USE
 app.get("/create_Studenti", (req,res)=>Studenti.create(req,res))
@@ -90,11 +92,14 @@ app.get("/alter_Studenti", (req,res)=>Studenti.alter(req,res))
 app.get("/truncate_Studenti", (req,res)=>Studenti.truncate(req,res))
 app.get("/get_Studente", (req,res)=>Studenti.get_studente(req,res))//USE
 
+
+app.get("/create_Pizze", (req,res)=>Pizze.create(req,res))
 app.get("/get_Pizze", (req,res)=>Pizze.get(req,res))//USE
 app.get("/insert_Pizze", (req,res)=>Pizze.insert(req,res))//USE
 app.get("/alter_Pizze", (req,res)=>Pizze.alter(req,res))
 app.get("/drop_Pizze", (req,res)=>Pizze.drop(req,res))//USE
 
+//DONE
 app.get("/create_Ordini", (req,res)=>Ordini.create(req,res))
 app.get("/get_Ordini", (req,res)=>Ordini.get_all(req,res))
 app.get("/get_Ordini_Studente", (req,res)=>Ordini.get_ordini_studente(req,res))//USE
@@ -106,6 +111,7 @@ app.get("/truncate_Ordini", (req,res)=>Ordini.truncate(req,res))
 app.get("/drop_table_Ordini", (req,res)=>Ordini.drop_table(req,res))
 app.get("/get_Ordini_All_Classi", (req,res)=>Ordini.get_ordini_all_classi(req,res))//USE
 
+//DONE
 app.get("/get_Amministratori", (req,res)=>Amministratori.get(req,res))
 app.get("/check_id_Amministratori", (req,res)=>Amministratori.check_id(req,res))//USE
 app.get("/create_Amministratori", (req,res)=>Amministratori.create(req,res))
@@ -115,6 +121,7 @@ app.get("/alter_Amministratori", (req,res)=>Amministratori.alter(req,res))
 app.get("/truncate_Amministratori", (req,res)=>Amministratori.truncate(req,res))
 app.get("/get_Amministratore", (req,res)=>Amministratori.get_amministratore(req,res))//USE
 
+//DONE
 app.get("/get_Pool", (req,res)=>Pool.get(req,res))
 app.get("/check_id_Pool", (req,res)=>Pool.check_id(req,res))//USE
 app.get("/create_Pool", (req,res)=>Pool.create(req,res))

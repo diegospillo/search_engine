@@ -1,5 +1,18 @@
 const connection = require("../connectionDB");
 
+function Create(req, res) {
+  const pool = connection();
+
+  pool.query("CREATE TABLE Classi (id SERIAL PRIMARY KEY, anno VARCHAR(5) NOT NULL, sezione VARCHAR(5) NOT NULL)", (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        res.send("Tabella creata con successo!");
+        pool.end();
+      }
+    });
+}
+
 function Get(req, res) {
   const pool = connection();
 
@@ -50,6 +63,7 @@ function Drop(req, res) {
 }
 
 module.exports = {
+  create: Create,
   get: Get,
   insert: Insert,
   drop: Drop
