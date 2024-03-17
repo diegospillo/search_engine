@@ -1,47 +1,33 @@
 const axios = require('axios');
 
-const url = "https://pizzappbackend.onrender.com";
+const url = process.env.URL || "http://localhost:5000";
 
-async function truncate_Ordini() {
-    const response = await axios.get(url+'/truncate_Ordini');
-    return await response.data;
-}
 
-async function getClassi(id) {
-    const response = await axios.get(url+'/get_Classi');
+//  BACKOFFICE
+async function getRicerche(id) {
+    const response = await axios.get(url+'/get_Ricerche');
     const data_res = filter(response,id);
     return data_res;
 }
 
-async function getPizze(id) {
-    const response = await axios.get(url+'/get_Pizze');
+async function getSessioni(id) {
+    const response = await axios.get(url+'/get_Sessioni');
     const data_res = filter(response,id);
     return data_res;
 }
 
-async function getStudenti(id) {
-    const response = await axios.get(url+'/get_Studenti');
+async function getTipi_Utente(id) {
+    const response = await axios.get(url+'/get_Tipi_Utente');
     const data_res = filter(response,id);
     return data_res;
 }
 
-async function getOrdini(id) {
-    const response = await axios.get(url+'/get_Ordini');
+async function getUtenti(id) {
+    const response = await axios.get(url+'/get_Utenti');
     const data_res = filter(response,id);
     return data_res;
 }
 
-async function getAmministratori(id) {
-    const response = await axios.get(url+'/get_Amministratori');
-    const data_res = filter(response,id);
-    return data_res;
-}
-
-async function getPool(id) {
-    const response = await axios.get(url+'/get_Pool');
-    const data_res = filter(response,id);
-    return data_res;
-}
 
 function filter(response,id){
     let data_res = response.data;
@@ -60,11 +46,8 @@ return [];
 }
 
 module.exports = {
-    get_classi: getClassi,
-    get_pizze: getPizze,
-    get_studenti: getStudenti,
-    get_ordini: getOrdini,
-    get_amministratori: getAmministratori,
-    get_pool: getPool,
-    truncate_ordini: truncate_Ordini
+    get_ricerche: getRicerche,
+    get_sessioni: getSessioni,
+    get_tipi_utente: getTipi_Utente,
+    get_utenti: getUtenti,
 }

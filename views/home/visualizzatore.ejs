@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SearchEngine</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    body{margin: 0;padding: 0;background: url(https://i.ibb.co/VQmtgjh/6845078.png) no-repeat;height: 100vh;font-family: sans-serif;background-size: cover;background-repeat: no-repeat;background-position: center;overflow: hidden}@media screen and (max-width: 600px){body{background-size: cover;display: fixed}}
+    #___gcse_0 > div{
+      border-radius: 50px;
+      width: 700px;
+      margin-top: 250px;
+    }
+    #___gcse_0 > div:hover{
+      color: #42F3FA;border: 5px solid #42F3FA;border-radius: 50px;box-shadow: 0 0 5px rgba(0,255,0,.3), 0 0 10px rgba(0,255,0,.2), 0 0 15px rgba(0,255,0,.1), 0 2px 0 black
+    }
+    #gsc-i-id1{
+      font-size: 30px;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+    }
+    #___gcse_0 > div > div > form > table > tbody > tr > td.gsc-search-button > button{
+      background-color: #59238F;
+      font-size: 25px;
+      border-radius: 50px;
+    }
+ </style>
+  <script>
+  const API_URL = '/maxAge';
+// Effettuare una richiesta GET all'API
+setInterval(()=>{
+axios.get(API_URL)
+  .then(response => {
+    // Handle success
+    if(parseInt(response.data) <= 0) document.getElementById("logout").click()
+    else document.getElementById("sessione").innerText = "La sessione scade tra: " + response.data;
+  })
+  .catch(error => {
+    // Handle error
+    console.error(error);
+  });
+},1000)
+function insert_ricerca(){
+  const nome_ricerca = document.getElementById("gsc-i-id1").value;
+  const id_sessione = document.getElementById("id_sessione").value;
+  if(nome_ricerca!=""){
+    axios.get(`http://localhost:5000/insert_Ricerche?nome_ricerca=${nome_ricerca}&id_sessione=${id_sessione}`)
+  .then(response => {
+    // Handle success
+  })
+  .catch(error => {
+    // Handle error
+    console.error(error);
+  });
+  }
+}
+setTimeout(()=>{
+ document.querySelector("#___gcse_0 > div > div > form > table > tbody > tr > td.gsc-search-button > button").addEventListener("click",insert_ricerca);
+  document.querySelector("body > table").addEventListener("click",insert_ricerca);
+  document.addEventListener('keydown', (event) => {
+    console.log(event.keyCode)
+  if (event.keyCode === 13) {
+    insert_ricerca()
+  }
+});
+},1000)
+</script>
+</head>
+
+<body>
+  <nav class="navbar  bg-black bg-gradient" style="border-bottom: solid 2px #59238F;">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1" style="font-size: 30px;color: white;">SearchEngine</span>
+      <div class="btn-group dropstart" role="group">
+      <img class="user dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" src="https://i.ibb.co/yVGxFPR/2.png" height="55px" width="55px">
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item disabled" aria-disabled="true">Ciao <%= username %>!</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/logout" id="logout" style="color: #dc3545;">Logout</a></li>
+      </ul>
+    </div>
+    </div>
+  </nav>
+    <p id="sessione">La sessione scadrà tra</p>
+    <form action="/insert_Ricerche" method="get">
+      <div id="search">
+        <input id="id_sessione" type="hidden" value="<%= id_sessione %>">
+        <center>
+        <div class="gcse-search"></div>
+        </center>
+      </div>
+    </form>
+    <script async src="https://cse.google.com/cse.js?cx=85f9573aa6b2f4a04">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
+
+</html>
